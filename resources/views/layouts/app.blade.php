@@ -22,8 +22,10 @@
 
     <!-- ✅ Professionele Header -->
     <header class="navbar">
+
+	
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-            <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 19px;">
                 <a href="{{ route('dashboard.openbaar') }}" style="font-weight: 700; font-size: 20px; color: #0d6efd;">
                     🌐 MijnWebsite
                 </a>
@@ -31,10 +33,11 @@
 
             <ul style="display: flex; gap: 20px; align-items: center; margin: 0; padding: 0; list-style: none;">
                 <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
+                <li><a href="{{ route('admin.files.essentials') }}">📄 Pagina overzicht</a></li>
                 <li><a href="{{ route('overons') }}">Over ons</a></li>
                 <li><a href="{{ route('standpunten') }}">Standpunten</a></li>
                 <li><a href="{{ route('nieuws') }}">Nieuws</a></li>
-                <li><a href="{{ route('programma') }}">Programma</a></li>
+                <li><a href="{{ route('programma') }}">Programma123</a></li>
                 <li><a href="{{ route('agenda') }}">Agenda</a></li>
                 <li><a href="{{ route('contact') }}">Contact</a></li>
 
@@ -106,7 +109,7 @@
             <div>
                 <h3>📱 Volg ons</h3>
                 <ul>
-                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
                     <li><a href="#">Instagram</a></li>
                     <li><a href="#">LinkedIn</a></li>
                 </ul>
