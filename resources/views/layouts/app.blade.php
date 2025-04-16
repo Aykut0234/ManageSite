@@ -96,9 +96,19 @@
 
     <!-- ✅ Dropdown script -->
     <script>
+<<<<<<< Updated upstream
         document.addEventListener('DOMContentLoaded', function () {
             const trigger = document.getElementById('dropdownTrigger');
             const menu = document.getElementById('dropdownMenu');
+=======
+    document.addEventListener('DOMContentLoaded', function () {
+        const trigger = document.getElementById('dropdownTrigger');
+        const menu = document.getElementById('dropdownMenu');
+
+        if (trigger && menu) {
+            // Zorg dat het menu onzichtbaar is bij laden
+            menu.style.display = 'none';
+>>>>>>> Stashed changes
 
             trigger.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -110,9 +120,20 @@
                     menu.style.display = 'none';
                 }
             });
+<<<<<<< Updated upstream
         });
     </script>
 
     @yield('scripts')
 </body>
 </html>
+=======
+        }
+    });
+</script>
+
+
+    @yield('scripts')
+</body>
+</html>
+>>>>>>> Stashed changes

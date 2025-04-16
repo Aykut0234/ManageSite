@@ -70,21 +70,32 @@ a:hover {
     font-weight: 500;
 }
 
+/* ✅ Dropdown-menu standaard verbergen */
 .dropdown-menu {
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background: #ffffff;
     border: 1px solid #e2e8f0;
+<<<<<<< Updated upstream
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     display: none;
+=======
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+>>>>>>> Stashed changes
     min-width: 220px;
     padding: 10px 0;
     margin-top: 8px;
     z-index: 200;
     animation: fadeIn 0.2s ease-in-out;
 }
+
+
+
+
 
 .dropdown-menu li {
     padding: 10px 20px;
