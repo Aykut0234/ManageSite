@@ -2,12 +2,24 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminFileController;
-
 use App\Http\Controllers\ChatController;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Admin-routes
+// ✅ Home route afhankelijk van rol
+Route::get('/', function () {
+    if (Auth::check()) {
+        if (Auth::user()->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        } elseif (Auth::user()->hasRole('gebruiker')) {
+            return redirect()->route('user.dashboard');
+        }
+    }
+
+    return redirect()->route('dashboard.openbaar');
+});
+
+// ✅ Admin-routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     Route::get('/', function () {
@@ -26,8 +38,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         Route::post('/blade/edit/{name}', [AdminFileController::class, 'updateBlade'])->name('admin.files.blade.update');
         Route::get('/blade/create', [AdminFileController::class, 'createBlade'])->name('admin.files.blade.create');
         Route::post('/blade/create', [AdminFileController::class, 'storeBlade'])->name('admin.files.blade.store');
-
-
     });
 
     Route::prefix('controllers')->group(function () {
@@ -35,7 +45,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         Route::get('/edit/{name}', [AdminFileController::class, 'editController'])->name('admin.files.controller.edit');
         Route::post('/edit/{name}', [AdminFileController::class, 'updateController'])->name('admin.files.controller.update');
     });
-    
+
     Route::prefix('special')->group(function () {
         Route::get('/web', [AdminFileController::class, 'webFile'])->name('admin.special.web');
         Route::post('/web', [AdminFileController::class, 'updateWebFile'])->name('admin.special.web.update');
@@ -50,76 +60,33 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/pages', function () {
         return view('admin.pages.index');
     })->name('admin.pages.index');
-    
-
 });
 
-
-
-
-// Gebruiker-routes
+// ✅ Gebruiker-routes
 Route::middleware(['auth', 'role:gebruiker'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('user.dashboard');
+
     Route::get('/chat', [ChatController::class, 'userChat'])->name('chat.user');
     Route::post('/chat/send', [ChatController::class, 'sendUserMessage'])->name('chat.user.send');
 });
 
+// ✅ Openbare pagina’s
+Route::get('/dashboard-openbaar', fn () => view('dashboard-openbaar'))->name('dashboard.openbaar');
+Route::get('/over-ons', fn () => view('overons'))->name('overons');
+Route::get('/standpunten', fn () => view('standpunten'))->name('standpunten');
+Route::get('/programma', fn () => view('programma'))->name('programma');
+Route::get('/nieuws', fn () => view('nieuws'))->name('nieuws');
+Route::get('/agenda', fn () => view('agenda'))->name('agenda');
+Route::get('/contact', fn () => view('contact'))->name('contact');
 
-Route::get('/dashboard-openbaar', function () {
-    return view('dashboard-openbaar');
-})->name('dashboard.openbaar');
-Route::get('/over-ons', function () {
-    return view('overons');
-})->name('overons');
-Route::get('/standpunten', function () {
-    return view('standpunten');
-})->name('standpunten');
-Route::get('/programma', function () {
-    return view('programma');
-})->name('programma');
-Route::get('/nieuws', function () {
-    return view('nieuws');
-})->name('nieuws');
-Route::get('/agenda', function () {
-    return view('agenda');
-})->name('agenda');
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
+// ✅ Profielroutes (voor alle ingelogde gebruikers)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// ✅ Laravel Breeze Auth
 require __DIR__.'/auth.php';
