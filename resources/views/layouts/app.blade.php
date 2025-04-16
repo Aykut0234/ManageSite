@@ -20,8 +20,6 @@
 <body class="font-sans antialiased">
 
     <!-- ✅ Navigatiebalk -->
-    <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ccc;">
-        <ul style="list-style: none; display: flex; gap: 20px; margin: 0; align-items: center;">
     <nav class="navbar">
         <ul>
             <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
@@ -30,29 +28,11 @@
             <li><a href="#">Contact</a></li>
 
             @auth
-                @role('admin')
-                    <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
-                    <li><a href="{{ route('chat.admin.list') }}">💬 Chats met gebruikers</a></li>
-                @endrole
-
-                @role('gebruiker')
-                    <li><a href="{{ route('user.dashboard') }}">Mijn Dashboard</a></li>
-                    <li><a href="{{ route('chat.user') }}">💬 Chat met admin</a></li>
-                @endrole
-
-                <li>
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Uitloggen
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
             @role('admin')
                 <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">📄 Pagina’s bewerken ▾</a>
-                    <ul class="dropdown-menu">
+                    <a href="#" class="dropdown-toggle" id="dropdownTrigger">📄 Pagina’s bewerken ▾</a>
+                    <ul class="dropdown-menu" id="dropdownMenu">
                         <li><a href="{{ route('admin.files.blades') }}">Blade-bestanden</a></li>
                         <li><a href="{{ route('admin.files.controllers') }}">Controllers</a></li>
                         <li><a href="{{ route('admin.special.web') }}">Routes (web.php)</a></li>
@@ -107,23 +87,32 @@
             </div>
         </div>
     </footer>
-    
 
-    <!-- ✅ Weglot taalwisselaar -->
-    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <!-- ✅ CodeMirror CSS & JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/php/php.min.js"></script>
+
+    <!-- ✅ Dropdown script -->
     <script>
-        Weglot.initialize({
-            api_key: 'wg_d060263e5186147cc17418cfcaf5eefd5'
+        document.addEventListener('DOMContentLoaded', function () {
+            const trigger = document.getElementById('dropdownTrigger');
+            const menu = document.getElementById('dropdownMenu');
+
+            trigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!trigger.contains(e.target) && !menu.contains(e.target)) {
+                    menu.style.display = 'none';
+                }
+            });
         });
     </script>
 
+    @yield('scripts')
 </body>
-
-<!-- ✅ CodeMirror CSS & JS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/php/php.min.js"></script>
-
-@yield('scripts')
 </html>
