@@ -222,6 +222,21 @@ label {
     font-size: 14px;
     padding: 10px;
 }
+/* ✅ Sticky footer layout */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.layout-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main.content {
+    flex: 1;
+}
 
 /* ✅ Animaties */
 @keyframes fadeIn {

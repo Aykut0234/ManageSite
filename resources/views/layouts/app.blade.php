@@ -19,14 +19,9 @@
 </head>
 <body class="font-sans antialiased">
 
-    <!-- ✅ Navigatiebalk -->
-<!-- ✅ Professionele Header -->
-<header class="navbar">
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <a href="{{ route('dashboard.openbaar') }}" style="font-weight: 700; font-size: 20px; color: #0d6efd;">🌐 MijnWebsite</a>
-        </div>
+    <div class="layout-wrapper">
 
+<<<<<<< Updated upstream
         <ul style="display: flex; gap: 20px; align-items: center; margin: 0; padding: 0; list-style: none;">
             <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
             <li><a href="{{ route('overons') }}">Over ons</a></li>
@@ -35,85 +30,98 @@
             <li><a href="{{ route('programma') }}">Programma</a></li>
             <li><a href="{{ route('agenda') }}">Agenda</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
+=======
+        <!-- ✅ HEADER -->
+        <header class="navbar">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <a href="{{ route('dashboard.openbaar') }}" style="font-weight: 700; font-size: 20px; color: #0d6efd;">🌐 MijnWebsite</a>
+                </div>
+>>>>>>> Stashed changes
 
-            @auth
-            @role('admin')
-                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" id="dropdownTrigger">⚙️ Beheer ▾</a>
-                    <ul class="dropdown-menu" id="dropdownMenu">
-                        <li><a href="{{ route('admin.files.blades') }}">Blade-bestanden</a></li>
-                        <li><a href="{{ route('admin.files.controllers') }}">Controllers</a></li>
-                        <li><a href="{{ route('admin.special.web') }}">Routes (web.php)</a></li>
-                        <li><a href="{{ route('admin.files.menu') }}">Menu (app.blade.php)</a></li>
-                        <li><a href="{{ route('admin.files.css') }}">CSS (style.css)</a></li>
+                <ul style="display: flex; gap: 20px; align-items: center; margin: 0; padding: 0; list-style: none;">
+                    <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
+                    <li><a href="{{ route('overons') }}">Over ons</a></li>
+                    <li><a href="#">Programma</a></li>
+                    <li><a href="#">Contact</a></li>
+
+                    @auth
+                    @role('admin')
+                        <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" id="dropdownTrigger">⚙️ Beheer ▾</a>
+                            <ul class="dropdown-menu" id="dropdownMenu">
+                                <li><a href="{{ route('admin.files.blades') }}">Blade-bestanden</a></li>
+                                <li><a href="{{ route('admin.files.controllers') }}">Controllers</a></li>
+                                <li><a href="{{ route('admin.special.web') }}">Routes (web.php)</a></li>
+                                <li><a href="{{ route('admin.files.menu') }}">Menu (app.blade.php)</a></li>
+                                <li><a href="{{ route('admin.files.css') }}">CSS (style.css)</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('chat.admin.list') }}">💬 Chats</a></li>
+                    @endrole
+
+                    @role('gebruiker')
+                        <li><a href="{{ route('user.dashboard') }}">Mijn Dashboard</a></li>
+                        <li><a href="{{ route('chat.user') }}">💬 Chat</a></li>
+                    @endrole
+
+                    <li>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            🚪 Uitloggen
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                    @else
+                        <li><a href="{{ route('login') }}">🔐 Inloggen</a></li>
+                        <li><a href="{{ route('register') }}">📝 Registreren</a></li>
+                    @endauth
+                </ul>
+            </div>
+        </header>
+
+        <!-- ✅ CONTENT -->
+        <main class="content">
+            @yield('content')
+        </main>
+
+        <!-- ✅ FOOTER -->
+        <footer class="main-footer">
+            <div class="container footer-content">
+                <div>
+                    <h3>🏢 Over Ons</h3>
+                    <p>
+                        Voorbeeldstraat 123<br>
+                        1234 AB Stad<br>
+                        KvK: 12345678<br>
+                        <a href="mailto:info@bedrijf.nl">info@bedrijf.nl</a>
+                    </p>
+                </div>
+                <div>
+                    <h3>🔗 Navigatie</h3>
+                    <ul>
+                        <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
+                        <li><a href="#">Over ons</a></li>
+                        <li><a href="#">Programma</a></li>
+                        <li><a href="#">Nieuws</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
-                </li>
-                <li><a href="{{ route('chat.admin.list') }}">💬 Chats</a></li>
-            @endrole
+                </div>
+                <div>
+                    <h3>📱 Volg ons</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
 
-            @role('gebruiker')
-                <li><a href="{{ route('user.dashboard') }}">Mijn Dashboard</a></li>
-                <li><a href="{{ route('chat.user') }}">💬 Chat</a></li>
-            @endrole
-
-            <li>
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                   🚪 Uitloggen
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </li>
-            @else
-                <li><a href="{{ route('login') }}">🔐 Inloggen</a></li>
-                <li><a href="{{ route('register') }}">📝 Registreren</a></li>
-            @endauth
-        </ul>
     </div>
-</header>
-
-
-    <!-- ✅ Pagina-inhoud -->
-    <main class="content">
-        @yield('content')
-    </main>
-
-    <!-- ✅ Footer -->
-<!-- ✅ Professionele Footer -->
-<footer class="main-footer">
-    <div class="container footer-content">
-        <div>
-            <h3>🏢 Over Ons</h3>
-            <p>
-                Voorbeeldstraat 123<br>
-                1234 AB Stad<br>
-                KvK: 12345678<br>
-                <a href="mailto:info@bedrijf.nl">info@bedrijf.nl</a>
-            </p>
-        </div>
-        <div>
-            <h3>🔗 Navigatie</h3>
-            <ul>
-                <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
-                <li><a href="#">Over ons</a></li>
-                <li><a href="#">Programma</a></li>
-                <li><a href="#">Nieuws</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3>📱 Volg ons</h3>
-            <ul>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">LinkedIn</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
 
     <!-- ✅ CodeMirror CSS & JS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
@@ -128,7 +136,6 @@
         const menu = document.getElementById('dropdownMenu');
 
         if (trigger && menu) {
-            // Zorg dat het menu onzichtbaar is bij laden
             menu.style.display = 'none';
 
             trigger.addEventListener('click', function (e) {
@@ -143,13 +150,8 @@
             });
         }
     });
-</script>
-
+    </script>
 
     @yield('scripts')
 </body>
-<<<<<<< Updated upstream
 </html>
-=======
-</html>
->>>>>>> Stashed changes
