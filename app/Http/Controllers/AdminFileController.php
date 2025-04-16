@@ -207,9 +207,15 @@ public function essentials()
                               $name === 'routes/web.php' || 
                               $name === 'resources/css/style.css' || 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                               File::exists(base_path($name)))  // Controle op controllers
         ->map(fn($name) => [
             'name' => basename($name),  // Alleen de naam van het bestand zonder pad
+=======
+                              File::exists(base_path($name)))  // Toegevoegd: Controle op controllers
+        ->map(fn($name) => [
+            'name' => basename($name),  // Alleen de naam van het bestand zonder het pad
+>>>>>>> Stashed changes
 =======
                               File::exists(base_path($name)))  // Toegevoegd: Controle op controllers
         ->map(fn($name) => [
@@ -231,7 +237,10 @@ public function essentials()
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
