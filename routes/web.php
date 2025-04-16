@@ -70,6 +70,10 @@ Route::middleware(['auth', 'role:gebruiker'])->group(function () {
 Route::get('/dashboard-openbaar', function () {
     return view('dashboard-openbaar');
 })->name('dashboard.openbaar');
+Route::get('/over-ons', function () {
+    return view('overons');
+})->name('overons');
+
 
 
 
