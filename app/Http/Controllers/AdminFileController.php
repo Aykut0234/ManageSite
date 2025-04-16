@@ -100,32 +100,31 @@ public function controllers()
 // Bewerk specifieke controller
 public function editController($name)
 {
-    $name = urldecode($name);
+    $name = urldecode($name); // Decodeer de naam van de controller
     $fullPath = app_path('Http/Controllers/' . $name);
 
     if (!file_exists($fullPath)) {
         abort(404, 'Controller niet gevonden');
     }
 
-    $content = \File::get($fullPath);
+    $content = \File::get($fullPath); // Haal de inhoud van de controller op
 
     return view('admin.files.edit_controller', compact('name', 'content'));
 }
 
-// Sla wijzigingen op
 public function updateController(Request $request, $name)
 {
-    $name = urldecode($name);
-    $fullPath = app_path('Http/Controllers/' . $name);
+    $path = app_path('Http/Controllers/' . $name);
 
-    if (!file_exists($fullPath)) {
+    if (!file_exists($path)) {
         abort(404, 'Controller niet gevonden');
     }
 
-    \File::put($fullPath, $request->input('content'));
+    \File::put($path, $request->input('content')); // Werk de controller bij
 
-    return back()->with('success', 'Controller opgeslagen!');
+    return back()->with('success', 'Controller succesvol opgeslagen.');
 }
+
 // ✅ Bewerken van web.php
 public function webFile()
 {
@@ -182,6 +181,49 @@ public function updateMenu(Request $request) {
     File::put(resource_path('views/layouts/app.blade.php'), $request->input('content'));
     return back()->with('success', 'Menu (app.blade.php) bijgewerkt!');
 }
+
+public function essentials()
+{
+    // Belangrijke bestanden, inclusief controllers
+    $belangrijkeBestanden = [
+        'dashboard-openbaar.blade.php',
+        'dashboard.blade.php',
+        'overons.blade.php',
+        'standpunten.blade.php',
+        'programma.blade.php',
+        'nieuws.blade.php',
+        'agenda.blade.php',
+        'contact.blade.php',
+        'layouts/app.blade.php',
+        'resources/css/style.css',
+        'routes/web.php',
+        'app/Http/Controllers/ChatController.php', // Toegevoegd: ChatController
+        'app/Http/Controllers/AdminFileController.php', // Toegevoegd: AdminFileController
+    ];
+
+    // Verwerken van de bestanden en de bijbehorende routes
+    $bladeFiles = collect($belangrijkeBestanden)
+        ->filter(fn($name) => File::exists(resource_path('views/' . $name)) || 
+                              $name === 'routes/web.php' || 
+                              $name === 'resources/css/style.css' || 
+                              File::exists(base_path($name)))  // Controle op controllers
+        ->map(fn($name) => [
+            'name' => basename($name),  // Alleen de naam van het bestand zonder pad
+            'edit_route' => match (true) {
+                $name === 'routes/web.php' => route('admin.special.web'),
+                $name === 'resources/css/style.css' => route('admin.files.css'),
+                $name === 'layouts/app.blade.php' => route('admin.files.menu'),
+                $name === 'app/Http/Controllers/ChatController.php' => route('admin.files.controller.edit', ['name' => $name]),
+                $name === 'app/Http/Controllers/AdminFileController.php' => route('admin.files.controller.edit', ['name' => $name]),
+                default => route('admin.files.blade.edit', ['name' => $name])
+            }
+        ]);
+
+    // Retourneer de view met de belangrijke bestanden
+    return view('admin.files.essentials', compact('bladeFiles'));
+}
+
+
 
 
 }

@@ -38,6 +38,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         Route::post('/blade/edit/{name}', [AdminFileController::class, 'updateBlade'])->name('admin.files.blade.update');
         Route::get('/blade/create', [AdminFileController::class, 'createBlade'])->name('admin.files.blade.create');
         Route::post('/blade/create', [AdminFileController::class, 'storeBlade'])->name('admin.files.blade.store');
+        Route::get('/files/essentials', [AdminFileController::class, 'essentials'])->name('admin.files.essentials');
+
     });
 
     Route::prefix('controllers')->group(function () {
@@ -55,6 +57,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
         Route::get('/menu', [AdminFileController::class, 'editMenu'])->name('admin.files.menu');
         Route::post('/menu', [AdminFileController::class, 'updateMenu'])->name('admin.files.menu.update');
+
+        
     });
 
     Route::get('/pages', function () {

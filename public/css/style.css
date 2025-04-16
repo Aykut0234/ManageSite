@@ -430,3 +430,117 @@ ul li:hover {
     box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
     outline: none;
 }
+/* ✅ Algemene layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.info-card {
+    background: #fff;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Header en knop styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h2 {
+    font-size: 28px;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.header .btn {
+    background-color: #0d6efd;
+    color: white;
+    padding: 8px 18px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.header .btn:hover {
+    background-color: #0b5ed7;
+}
+
+/* ✅ Flexbox voor secties naast elkaar */
+.section {
+    margin-bottom: 40px;
+    width: 100%; /* Zorgt ervoor dat de sectie de volledige breedte gebruikt */
+}
+
+.section-title {
+    font-size: 22px;
+    color: #1e293b;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+/* ✅ Lijstweergave voor bestanden */
+.file-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap; /* Zorgt ervoor dat de items in meerdere regels komen als ze niet passen */
+    gap: 16px;
+}
+
+.file-item {
+    background-color: #f9fafb;
+    padding: 16px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.2s;
+    width: 22%; /* Breedte per item */
+    min-width: 200px; /* Zorgt ervoor dat items niet te klein worden */
+}
+
+.file-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.file-item .btn-link {
+    color: #0d6efd;
+    font-size: 17px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.file-item .btn-link:hover {
+    color: #0a58ca;
+}
+
+/* ✅ Geen bestanden bericht */
+.no-files {
+    color: #64748b;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ✅ Responsive: mobiele weergave */
+@media (max-width: 768px) {
+    .file-item {
+        width: 100%; /* Zorgt ervoor dat elk item op een nieuwe regel komt op kleine schermen */
+        min-width: unset;
+    }
+    
+    .section {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+}

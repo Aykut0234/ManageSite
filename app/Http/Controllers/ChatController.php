@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ChatController extends Controller
 {
-    // Toon chat voor gebruiker
+    // Toon chat voor gebruikers
     public function userChat()
     {
         $admin = User::role('admin')->first();
