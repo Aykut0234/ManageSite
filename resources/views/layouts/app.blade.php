@@ -22,6 +22,7 @@
     <div class="layout-wrapper">
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <ul style="display: flex; gap: 20px; align-items: center; margin: 0; padding: 0; list-style: none;">
             <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
             <li><a href="{{ route('overons') }}">Over ons</a></li>
@@ -31,12 +32,17 @@
             <li><a href="{{ route('agenda') }}">Agenda</a></li>
             <li><a href="{{ route('contact') }}">Contact</a></li>
 =======
+=======
+>>>>>>> Stashed changes
         <!-- ✅ HEADER -->
         <header class="navbar">
             <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <a href="{{ route('dashboard.openbaar') }}" style="font-weight: 700; font-size: 20px; color: #0d6efd;">🌐 MijnWebsite</a>
                 </div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
                 <ul style="display: flex; gap: 20px; align-items: center; margin: 0; padding: 0; list-style: none;">
