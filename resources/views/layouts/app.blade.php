@@ -30,8 +30,11 @@
         <ul style="display: flex; gap: 20px; align-items: center; margin: 0; padding: 0; list-style: none;">
             <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
             <li><a href="{{ route('overons') }}">Over ons</a></li>
-            <li><a href="#">Programma</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{{ route('standpunten') }}">Standpunten</a></li>
+            <li><a href="{{ route('nieuws') }}">Nieuws</a></li>
+            <li><a href="{{ route('programma') }}">Programma</a></li>
+            <li><a href="{{ route('agenda') }}">Agenda</a></li>
+            <li><a href="{{ route('contact') }}">Contact</a></li>
 
             @auth
             @role('admin')

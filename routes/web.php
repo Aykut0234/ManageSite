@@ -73,6 +73,21 @@ Route::get('/dashboard-openbaar', function () {
 Route::get('/over-ons', function () {
     return view('overons');
 })->name('overons');
+Route::get('/standpunten', function () {
+    return view('standpunten');
+})->name('standpunten');
+Route::get('/programma', function () {
+    return view('programma');
+})->name('programma');
+Route::get('/nieuws', function () {
+    return view('nieuws');
+})->name('nieuws');
+Route::get('/agenda', function () {
+    return view('agenda');
+})->name('agenda');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 
 
