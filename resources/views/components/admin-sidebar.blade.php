@@ -14,11 +14,13 @@
             <hr style="border-color: #334155; margin: 16px 0;">
 
             <li><a href="{{ route('admin.dashboard') }}" style="color: #fff;">📊 Admin Dashboard</a></li>
+            <li><a href="{{ route('admin.files.essentials') }}" style="color: #fff;">📁 Frontend Bestanden</a></li>
+
 
             {{-- ✅ Dropdown --}}
             <li class="dropdown-group">
                 <div class="dropdown-toggle" onclick="toggleSidebarDropdown()" style="cursor: pointer; font-weight: 600;">
-                    ⚙️ Pagina’s bewerken ▾
+                    ⚙️ Alle bestanden ▾
                 </div>
                 <ul id="sidebarDropdown" style="list-style: none; padding-left: 12px; margin-top: 10px; display: none; flex-direction: column; gap: 8px;">
                     <li><a href="{{ route('admin.files.blades') }}" style="color: #fff;">📄 Blade-bestanden</a></li>

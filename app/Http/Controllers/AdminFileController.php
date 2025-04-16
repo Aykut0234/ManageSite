@@ -206,15 +206,15 @@ public function essentials()
         ->filter(fn($name) => File::exists(resource_path('views/' . $name)) || 
                               $name === 'routes/web.php' || 
                               $name === 'resources/css/style.css' || 
-                              File::exists(base_path($name)))  // Controle op controllers
+                              File::exists(base_path($name)))  // Toegevoegd: Controle op controllers
         ->map(fn($name) => [
-            'name' => basename($name),  // Alleen de naam van het bestand zonder pad
+            'name' => $name,
             'edit_route' => match (true) {
                 $name === 'routes/web.php' => route('admin.special.web'),
                 $name === 'resources/css/style.css' => route('admin.files.css'),
                 $name === 'layouts/app.blade.php' => route('admin.files.menu'),
-                $name === 'app/Http/Controllers/ChatController.php' => route('admin.files.controller.edit', ['name' => $name]),
-                $name === 'app/Http/Controllers/AdminFileController.php' => route('admin.files.controller.edit', ['name' => $name]),
+                $name === 'app/Http/Controllers/ChatController.php' => route('admin.files.controller.edit', ['name' => 'ChatController.php']),
+                $name === 'app/Http/Controllers/AdminFileController.php' => route('admin.files.controller.edit', ['name' => 'AdminFileController.php']),
                 default => route('admin.files.blade.edit', ['name' => $name])
             }
         ]);
@@ -222,8 +222,6 @@ public function essentials()
     // Retourneer de view met de belangrijke bestanden
     return view('admin.files.essentials', compact('bladeFiles'));
 }
-
-
 
 
 }
