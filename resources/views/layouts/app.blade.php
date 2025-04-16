@@ -21,7 +21,7 @@
 
     <!-- ✅ Navigatiebalk -->
     <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ccc;">
-        <ul style="list-style: none; display: flex; gap: 20px; margin: 0;">
+        <ul style="list-style: none; display: flex; gap: 20px; margin: 0; align-items: center;">
             <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
             <li><a href="#">Over ons</a></li>
             <li><a href="#">Programma</a></li>
@@ -30,16 +30,11 @@
             @auth
                 @role('admin')
                     <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
-                @endrole
-                @role('admin')
                     <li><a href="{{ route('chat.admin.list') }}">💬 Chats met gebruikers</a></li>
                 @endrole
 
                 @role('gebruiker')
                     <li><a href="{{ route('user.dashboard') }}">Mijn Dashboard</a></li>
-                    
-                @endrole
-                @role('gebruiker')
                     <li><a href="{{ route('chat.user') }}">💬 Chat met admin</a></li>
                 @endrole
 
@@ -84,10 +79,16 @@
                     <li><a href="#">Nieuws</a></li>
                 </ul>
             </div>
-
-            
         </div>
     </footer>
+
+    <!-- ✅ Weglot taalwisselaar -->
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_d060263e5186147cc17418cfcaf5eefd5'
+        });
+    </script>
 
 </body>
 </html>

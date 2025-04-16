@@ -53,10 +53,6 @@ Route::get('/dashboard-openbaar', function () {
 
 
 
-
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
