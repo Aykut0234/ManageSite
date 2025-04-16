@@ -22,6 +22,8 @@
     <!-- ✅ Navigatiebalk -->
     <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ccc;">
         <ul style="list-style: none; display: flex; gap: 20px; margin: 0; align-items: center;">
+    <nav class="navbar">
+        <ul>
             <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
             <li><a href="#">Over ons</a></li>
             <li><a href="#">Programma</a></li>
@@ -46,7 +48,35 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
+            @role('admin')
+                <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">📄 Pagina’s bewerken ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('admin.files.blades') }}">Blade-bestanden</a></li>
+                        <li><a href="{{ route('admin.files.controllers') }}">Controllers</a></li>
+                        <li><a href="{{ route('admin.special.web') }}">Routes (web.php)</a></li>
+                        <li><a href="{{ route('admin.files.menu') }}">Menu (app.blade.php)</a></li>
+                        <li><a href="{{ route('admin.files.css') }}">CSS (style.css)</a></li>
+                    </ul>
                 </li>
+                <li><a href="{{ route('chat.admin.list') }}">💬 Chats met gebruikers</a></li>
+            @endrole
+
+            @role('gebruiker')
+                <li><a href="{{ route('user.dashboard') }}">Mijn Dashboard</a></li>
+                <li><a href="{{ route('chat.user') }}">💬 Chat met admin</a></li>
+            @endrole
+
+            <li>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Uitloggen
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
             @else
                 <li><a href="{{ route('login') }}">Inloggen</a></li>
                 <li><a href="{{ route('register') }}">Registreren</a></li>
@@ -55,24 +85,20 @@
     </nav>
 
     <!-- ✅ Pagina-inhoud -->
-    <main class="py-4">
+    <main class="content">
         @yield('content')
     </main>
 
     <!-- ✅ Footer -->
-    <footer style="background: #f0f0f0; padding: 30px 0; margin-top: 50px; border-top: 1px solid #ccc;">
-        <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; padding: 0 20px;">
-            
-            <!-- Logo & adres -->
-            <div style="flex: 1;">
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div>
                 <h3>🏠 Ons Bedrijf</h3>
                 <p>Voorbeeldstraat 123<br>1234 AB Stad</p>
             </div>
-
-            <!-- Links -->
-            <div style="flex: 1;">
+            <div>
                 <h3>Navigatie</h3>
-                <ul style="list-style: none; padding: 0;">
+                <ul>
                     <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
                     <li><a href="#">Over ons</a></li>
                     <li><a href="#">Contact</a></li>
@@ -81,6 +107,7 @@
             </div>
         </div>
     </footer>
+    
 
     <!-- ✅ Weglot taalwisselaar -->
     <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
@@ -91,4 +118,12 @@
     </script>
 
 </body>
+
+<!-- ✅ CodeMirror CSS & JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/php/php.min.js"></script>
+
+@yield('scripts')
 </html>
