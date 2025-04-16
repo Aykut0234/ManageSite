@@ -3,6 +3,50 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Admin-routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
+
+
+
+
+// Gebruiker-routes
+Route::middleware(['auth', 'role:gebruiker'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('user.dashboard');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
