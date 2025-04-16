@@ -11,7 +11,7 @@
     <div style="margin-top: 30px;">
         <h3>Wat kun je hier doen?</h3>
         <ul>
-            <li>Bekijk ons <a href="#">programma</a></li>
+            <li>Bekijk ons <a href="#">ahmed</a></li>
             <li>Lees meer <a href="#">over ons</a></li>
             <li>Bekijk de <a href="#">nieuws & agenda</a></li>
             <li>Wil je meedoen? <a href="{{ route('register') }}">Registreer je</a> of <a href="{{ route('login') }}">log in</a></li>

@@ -6,7 +6,7 @@
     <p>Welkom bij je persoonlijke omgeving.</p>
 
     <ul>
-        <li><a href="#">📬 Berichten bekijken</a></li>
+        <li><a href="#">📬 111Berichten bekijken</a></li>
         <li><a href="#">👤 Mijn gegevens</a></li>
         {{-- Voeg hier dynamische content toe later --}}
     </ul>
