@@ -206,21 +206,9 @@ public function essentials()
         ->filter(fn($name) => File::exists(resource_path('views/' . $name)) || 
                               $name === 'routes/web.php' || 
                               $name === 'resources/css/style.css' || 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
                               File::exists(base_path($name)))  // Controle op controllers
         ->map(fn($name) => [
             'name' => basename($name),  // Alleen de naam van het bestand zonder pad
-=======
-                              File::exists(base_path($name)))  // Toegevoegd: Controle op controllers
-        ->map(fn($name) => [
-            'name' => basename($name),  // Alleen de naam van het bestand zonder het pad
->>>>>>> Stashed changes
-=======
-                              File::exists(base_path($name)))  // Toegevoegd: Controle op controllers
-        ->map(fn($name) => [
-            'name' => basename($name),  // Alleen de naam van het bestand zonder het pad
->>>>>>> Stashed changes
             'edit_route' => match (true) {
                 $name === 'routes/web.php' => route('admin.special.web'),
                 $name === 'resources/css/style.css' => route('admin.files.css'),
@@ -236,12 +224,6 @@ public function essentials()
 }
 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 }
