@@ -27,5 +27,11 @@
         @endif
 
     </div>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
+        ← Terug
+    </a>
+    
 </div>
+
+
 @endsection

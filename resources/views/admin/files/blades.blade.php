@@ -15,9 +15,10 @@
             <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 16px;">
                 @foreach ($bladeFiles as $file)
                     <li style="background-color: #f9fafb; padding: 16px 20px; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.02); transition: box-shadow 0.2s;">
-                        <a href="{{ route('admin.files.blade.edit', ['name' => $file['name']]) }}" class="btn-link" style="font-size: 17px;">
+                        <a href="{{ route('admin.files.blade.edit', ['name' => $file['name']]) }}">
                             {{ $file['name'] }}
                         </a>
+                        
                     </li>
                 @endforeach
             </ul>
@@ -26,5 +27,10 @@
         @endif
 
     </div>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
+        ← Terug
+    </a>
+    
 </div>
+
 @endsection

@@ -16,6 +16,10 @@
         <br>
         <button type="submit" class="btn btn-primary">Opslaan</button>
     </form>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
+        ← Terug
+    </a>
+    
 </div>
 @endsection
 

@@ -36,6 +36,10 @@
 
         <button type="submit" class="btn btn-success">➕ Aanmaken</button>
     </form>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
+        ← Terug
+    </a>
+    
 </div>
 @endsection
 
@@ -58,3 +62,4 @@
     editor.setSize("100%", "400px");
 </script>
 @endsection
+

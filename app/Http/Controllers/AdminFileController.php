@@ -20,6 +20,7 @@ class AdminFileController extends Controller
         return view('admin.files.blades', compact('bladeFiles'));
     }
 
+<<<<<<< Updated upstream
     // Bewerk een specifiek bladae-bestand
     public function editBlade($name)
 {
@@ -39,11 +40,31 @@ class AdminFileController extends Controller
 }
 
 
+=======
+    // Bewerk een specifiek blade-bestand
+    public function editBlade(Request $request)
+    {
+        $name = urldecode($request->query('name'));
+        $fullPath = resource_path('views/' . $name);
+    
+        if (!file_exists($fullPath)) {
+            abort(404, 'Bestand niet gevonden');
+        }
+    
+        $content = File::get($fullPath);
+    
+        return view('admin.files.edit_blade', [
+            'name' => $name,
+            'content' => $content,
+        ]);
+    }
+>>>>>>> Stashed changes
     // Opslaan van wijzigingen in blade
     public function updateBlade(Request $request, $name)
     {
+        $name = urldecode($name); // ← voeg dit toe als het er nog niet staat
         $path = resource_path('views/' . $name);
-        abort_unless(File::exists($path), 404);
+        abort_unless(File::exists(path: $path), 404);
 
         File::put($path, $request->input('content'));
         return redirect()->back()->with('success', 'Bestand opgeslagen.');
