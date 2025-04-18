@@ -34,9 +34,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // ✅ Files
     Route::prefix('files')->group(function () {
         Route::get('/blades', [AdminFileController::class, 'blades'])->name('admin.files.blades');
-    
-        Route::get('/admin/files/blade/edit/{name}', [AdminFileController::class, 'editBlade'])->name('admin.files.blade.edit');
-
+        Route::get('/blade/edit/{name}', [AdminFileController::class, 'editBlade'])->name('admin.files.blade.edit');
         Route::post('/blade/edit/{name}', [AdminFileController::class, 'updateBlade'])->name('admin.files.blade.update');
         Route::get('/blade/create', [AdminFileController::class, 'createBlade'])->name('admin.files.blade.create');
         Route::post('/blade/create', [AdminFileController::class, 'storeBlade'])->name('admin.files.blade.store');
@@ -46,8 +44,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     Route::prefix('controllers')->group(function () {
         Route::get('/', [AdminFileController::class, 'controllers'])->name('admin.files.controllers');
-        Route::get('/admin/controllers/edit/{name}', [AdminFileController::class, 'editController'])->name('admin.files.controller.edit');
-        
+        Route::get('/edit/{name}', [AdminFileController::class, 'editController'])->name('admin.files.controller.edit');
         Route::post('/edit/{name}', [AdminFileController::class, 'updateController'])->name('admin.files.controller.update');
     });
 
