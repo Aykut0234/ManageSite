@@ -34,7 +34,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // ✅ Files
     Route::prefix('files')->group(function () {
         Route::get('/blades', [AdminFileController::class, 'blades'])->name('admin.files.blades');
-        Route::get('/blade/edit/{name}', [AdminFileController::class, 'editBlade'])->name('admin.files.blade.edit');
+    
+        Route::get('/admin/files/blade/edit/{name}', [AdminFileController::class, 'editBlade'])->name('admin.files.blade.edit');
+
         Route::post('/blade/edit/{name}', [AdminFileController::class, 'updateBlade'])->name('admin.files.blade.update');
         Route::get('/blade/create', [AdminFileController::class, 'createBlade'])->name('admin.files.blade.create');
         Route::post('/blade/create', [AdminFileController::class, 'storeBlade'])->name('admin.files.blade.store');
@@ -78,7 +80,7 @@ Route::middleware(['auth', 'role:gebruiker'])->group(function () {
 });
 
 // ✅ Openbare pagina’s
-Route::get('/dashboard-openbaar', fn () => view('dashboard-openbaar'))->name('dashboard.openbaar');
+Route::get('/home', fn () => view('dashboard-openbaar'))->name('dashboard.openbaar');
 Route::get('/over-ons', fn () => view('overons'))->name('overons');
 Route::get('/standpunten', fn () => view('standpunten'))->name('standpunten');
 Route::get('/programma', fn () => view('programma'))->name('programma');
