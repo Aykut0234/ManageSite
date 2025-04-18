@@ -1,6 +1,15 @@
 <header class="navbar-full">
     <div class="nav-left">
-        <a href="{{ route('dashboard.openbaar') }}" class="logo">🌐 MijnWebsite</a>
+        @php
+            $setting = \App\Models\Setting::first();
+        @endphp
+        @if($setting && $setting->logo)
+            <a href="{{ route('dashboard.openbaar') }}" class="logo">
+                <img src="{{ asset('storage/' . $setting->logo) }}" alt="Website Logo" style="max-height: 40px;">
+            </a>
+        @else
+            <a href="{{ route('dashboard.openbaar') }}" class="logo">🌐 MijnWebsite</a>
+        @endif
     </div>
 
     <ul class="nav-menu">

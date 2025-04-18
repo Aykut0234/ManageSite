@@ -15,6 +15,13 @@
 
             <li><a href="{{ route('admin.dashboard') }}" style="color: #fff;">📊 Admin Dashboard</a></li>
             <li><a href="{{ route('admin.files.essentials') }}" style="color: #fff;">📁 Frontend Bestanden</a></li>
+            <!-- Logo Aanpassen Sectie -->
+            <li class="logo-settings-item">
+                <a href="{{ route('admin.settings.logo') }}" style="color: #fff; font-weight: bold;">
+                    🖼️ Pas het Logo aan
+                </a>
+            </li>
+
 
 
             {{-- ✅ Dropdown --}}

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminFileController;
+use App\Http\Controllers\SettingController;
+
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +23,8 @@ Route::get('/', function () {
 
 // ✅ Admin-routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-
+    Route::get('/settings/logo', [SettingController::class, 'showLogoForm'])->name('admin.settings.logo');
+    Route::post('/settings/logo', [SettingController::class, 'uploadLogo'])->name('admin.settings.logo.upload');
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');

@@ -187,7 +187,6 @@ public function updateMenu(Request $request) {
     File::put(resource_path('views/layouts/app.blade.php'), $request->input('content'));
     return back()->with('success', 'Menu (app.blade.php) bijgewerkt!');
 }
-
 public function essentials()
 {
     // Belangrijke bestanden, inclusief controllers
@@ -207,6 +206,8 @@ public function essentials()
         'app/Http/Controllers/AdminFileController.php', // Toegevoegd: AdminFileController
         'components/header.blade.php', // Toegevoegd: header
         'components/footer.blade.php', // Toegevoegd: footer
+        'auth/login.blade.php', // Toegevoegd: login blade
+        'auth/register.blade.php', // Toegevoegd: register blade
     ];
 
     // Verwerken van de bestanden en de bijbehorende routes
@@ -223,6 +224,8 @@ public function essentials()
                 $name === 'layouts/app.blade.php' => route('admin.files.menu'),
                 $name === 'components/header.blade.php' => route('admin.files.blade.edit', ['name' => 'components/header.blade.php']),
                 $name === 'components/footer.blade.php' => route('admin.files.blade.edit', ['name' => 'components/footer.blade.php']),
+                $name === 'auth/login.blade.php' => route('admin.files.blade.edit', ['name' => 'auth/login.blade.php']),
+                $name === 'auth/register.blade.php' => route('admin.files.blade.edit', ['name' => 'auth/register.blade.php']),
                 $name === 'app/Http/Controllers/ChatController.php' => route('admin.files.controller.edit', ['name' => 'ChatController.php']),
                 $name === 'app/Http/Controllers/AdminFileController.php' => route('admin.files.controller.edit', ['name' => 'AdminFileController.php']),
                 default => route('admin.files.blade.edit', ['name' => $name])
@@ -232,6 +235,7 @@ public function essentials()
     // Retourneer de view met de belangrijke bestanden
     return view('admin.files.essentials', compact('bladeFiles'));
 }
+
 
 
 }
