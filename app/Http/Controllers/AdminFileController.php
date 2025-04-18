@@ -205,6 +205,8 @@ public function essentials()
         'routes/web.php',
         'app/Http/Controllers/ChatController.php', // Toegevoegd: ChatController
         'app/Http/Controllers/AdminFileController.php', // Toegevoegd: AdminFileController
+        'components/header.blade.php', // Toegevoegd: header
+        'components/footer.blade.php', // Toegevoegd: footer
     ];
 
     // Verwerken van de bestanden en de bijbehorende routes
@@ -219,6 +221,8 @@ public function essentials()
                 $name === 'routes/web.php' => route('admin.special.web'),
                 $name === 'public/css/style.css' => route('admin.files.css'),
                 $name === 'layouts/app.blade.php' => route('admin.files.menu'),
+                $name === 'components/header.blade.php' => route('admin.files.blade.edit', ['name' => 'components/header.blade.php']),
+                $name === 'components/footer.blade.php' => route('admin.files.blade.edit', ['name' => 'components/footer.blade.php']),
                 $name === 'app/Http/Controllers/ChatController.php' => route('admin.files.controller.edit', ['name' => 'ChatController.php']),
                 $name === 'app/Http/Controllers/AdminFileController.php' => route('admin.files.controller.edit', ['name' => 'AdminFileController.php']),
                 default => route('admin.files.blade.edit', ['name' => $name])
