@@ -3,27 +3,28 @@
 @section('content')
 <div class="container">
     <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 40px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);">
-        <h1 style="font-size: 32px; margin-bottom: 10px; color: #1e293b;">👋 Welkom op onze website</h1>
+        <h1 style="font-size: 32px; margin-bottom: 10px; color: #1e293b;">👋 {{ __('welcome_message') }}</h1>
         <p style="font-size: 18px; color: #475569; margin-bottom: 30px;">
-            Dit is het openbare dashboard. Iedereen — of je nu ingelogd bent of niet — kan deze pagina bekijken.
+            {{ __('description') }}
         </p>
 
         <div>
-            <h3 style="font-size: 22px; margin-bottom: 16px; color: #1d4ed8;">Wat kun je hier doen?</h3>
+            <h3 style="font-size: 22px; margin-bottom: 16px; color: #1d4ed8;">{{ __('what_can_you_do') }}</h3>
             <ul style="list-style: none; padding-left: 0; color: #334155;">
                 <li style="margin-bottom: 10px;">
-                    🔍 Bekijk ons <a href="#" class="btn-link">projectoverzicht</a>
+                    🔍 {{ __('project_overview') }} <a href="#" class="btn-link">{{ __('project_overview') }}</a>
                 </li>
                 <li style="margin-bottom: 10px;">
-                    📖 Lees meer <a href="#" class="btn-link">over ons</a>
+                    📖 {{ __('about_us') }} <a href="#" class="btn-link">{{ __('about_us') }}</a>
                 </li>
                 <li style="margin-bottom: 10px;">
-                    🗓️ Bekijk de <a href="#" class="btn-link">nieuws & agenda</a>
+                    🗓️ {{ __('news_and_agenda') }} <a href="#" class="btn-link">{{ __('news_and_agenda') }}</a>
                 </li>
                 <li style="margin-bottom: 10px;">
-                    ✅ Wil je meedoen? 
-                    <a href="{{ route('register') }}" class="btn-link">Registreer je</a> of 
-                    <a href="{{ route('login') }}" class="btn-link">log in</a>
+                    ✅ {{ __('want_to_join') }} 
+                    <a href="{{ route('register') }}" class="btn-link">{{ __('register') }}</a> 
+                    of 
+                    <a href="{{ route('login') }}" class="btn-link">{{ __('login') }}</a>
                 </li>
             </ul>
         </div>

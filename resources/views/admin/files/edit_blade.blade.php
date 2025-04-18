@@ -10,14 +10,18 @@
 
     <form method="POST" action="{{ route('admin.files.blade.update', ['name' => $name]) }}">
         @csrf
-        <textarea id="code" name="content">{{ old('content', $content) }}</textarea>
+        <div class="editor-container">
+            <textarea id="code" name="content">{{ old('content', $content) }}</textarea>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary mt-3">Opslaan</button>
-    </form>
-    <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px; float: right;">
         ← Terug
     </a>
-    
+    </form>
+
+    <!-- Terugknop rechts uitlijnen -->
+ 
 </div>
 @endsection
 
@@ -48,7 +52,7 @@
                 indentUnit: 4,
                 indentWithTabs: true,
             });
-            editor.setSize("100%", "500px");
+            editor.setSize("100%", "500px"); // De editor past zich aan de breedte en hoogte van de container aan
         }
     });
 </script>
@@ -67,5 +71,11 @@
     /* Zorg ervoor dat de CodeMirror editor zich aanpast aan de container */
     .CodeMirror {
         height: 100%;
+        width: 100%; /* Zorg ervoor dat de editor 100% breedte heeft */
+    }
+
+    /* Stijl voor de terugknop rechts */
+    .btn-secondary {
+        float: right;
     }
 </style>

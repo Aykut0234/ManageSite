@@ -1,0 +1,10 @@
+{
+    "welcome_message": "👋 Welcome to our website",
+    "description": "This is the public dashboard. Anyone — whether logged in or not — can view this page.",
+    "what_can_you_do": "What can you do here?",
+    "project_overview": "project overview",
+    "about_us": "about us",
+    "news_and_agenda": "news & agenda",
+    "register": "Register",
+    "login": "login"
+}

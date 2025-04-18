@@ -23,6 +23,9 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primary mt-3">Opslaan</button>
+        <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px; float: right;">
+        ← Terug
+    </a>
     </form>
     <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
         ← Terug

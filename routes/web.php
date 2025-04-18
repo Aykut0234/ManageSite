@@ -19,12 +19,21 @@ Route::get('/', function () {
     }
 
     return redirect()->route('dashboard.openbaar');
+    
+// Route om de taal te wijzigen
+
 });
 
 // ✅ Admin-routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/settings/logo', [SettingController::class, 'showLogoForm'])->name('admin.settings.logo');
-    Route::post('/settings/logo', [SettingController::class, 'uploadLogo'])->name('admin.settings.logo.upload');
+ // Route om logo te uploaden
+ // Route voor het wijzigen van de taal
+
+
+ Route::post('/settings/logo/upload', [SettingController::class, 'uploadLogo'])->name('admin.settings.logo.upload');
+
+    // Route om geüploade logo's weer te geven
+    Route::get('/settings/logo', [SettingController::class, 'showLogos'])->name('admin.settings.logo');
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
@@ -85,7 +94,9 @@ Route::middleware(['auth', 'role:gebruiker'])->group(function () {
 });
 
 // ✅ Openbare pagina’s
-Route::get('/home', fn () => view('dashboard-openbaar'))->name('dashboard.openbaar');
+Route::get('/locale/{locale}', [SettingController::class, 'setLanguage'])->name('locale.set');
+
+Route::get('/', fn () => view('dashboard-openbaar'))->name('dashboard.openbaar');
 Route::get('/over-ons', fn () => view('overons'))->name('overons');
 Route::get('/standpunten', fn () => view('standpunten'))->name('standpunten');
 Route::get('/programma', fn () => view('programma'))->name('programma');

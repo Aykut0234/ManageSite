@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Providers;
+use Illuminate\Support\Facades\App; // Voeg deze regel toe
+
+use Illuminate\Support\Facades\Session;
+
 
 use Illuminate\Support\ServiceProvider;
 
@@ -17,8 +21,9 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        $locale = Session::get('locale', 'en'); // Standaard 'en' als taal
+        App::setLocale($locale);
     }
 }

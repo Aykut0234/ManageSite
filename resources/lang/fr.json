@@ -1,0 +1,10 @@
+{
+    "welcome_message": "👋 Bienvenue sur notre site",
+    "description": "C'est le tableau de bord public. Tout le monde — que vous soyez connecté ou non — peut voir cette page.",
+    "what_can_you_do": "Que pouvez-vous faire ici?",
+    "project_overview": "aperçu du projet",
+    "about_us": "à propos de nous",
+    "news_and_agenda": "actualités et agenda",
+    "register": "S'inscrire",
+    "login": "se connecter"
+}
