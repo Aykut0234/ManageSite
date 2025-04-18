@@ -20,24 +20,24 @@ class AdminFileController extends Controller
         return view('admin.files.blades', compact('bladeFiles'));
     }
 
-    // Bewerk een specifiek blade-bestand
+    // Bewerk een specifiek bladae-bestand
     public function editBlade($name)
-    {
-        // Decodeer de naam van het bestand, zodat we ook URL-encoded bestandsnamen kunnen verwerken
-        $name = urldecode($name);
-        $fullPath = resource_path('views/' . $name);
+{
+    $name = urldecode($name);
+    $fullPath = resource_path('views/' . $name);
 
-        if (!file_exists($fullPath)) {
-            abort(404, 'Bestand niet gevonden');
-        }
-
-        $content = File::get($fullPath);
-
-        return view('admin.files.edit_blade', [
-            'name' => $name,
-            'content' => $content,
-        ]);
+    if (!file_exists($fullPath)) {
+        abort(404, 'Bestand niet gevonden');
     }
+
+    $content = File::get($fullPath);
+
+    return view('admin.files.edit_blade', [
+        'name' => $name,
+        'content' => $content,
+    ]);
+}
+
 
     // Opslaan van wijzigingen in blade
     public function updateBlade(Request $request, $name)
@@ -100,8 +100,7 @@ public function controllers()
 // Bewerk specifieke controller
 public function editController($name)
 {
-    // Decodeer de naam van de controller
-    $name = urldecode($name); 
+    $name = urldecode($name); // Decodeer de naam van de controller
     $fullPath = app_path('Http/Controllers/' . $name);
 
     if (!file_exists($fullPath)) {
@@ -113,7 +112,6 @@ public function editController($name)
     return view('admin.files.edit_controller', compact('name', 'content'));
 }
 
-// Opslaan van wijzigingen in controller
 public function updateController(Request $request, $name)
 {
     $path = app_path('Http/Controllers/' . $name);
@@ -162,9 +160,16 @@ public function updateWebFile(Request $request)
 
 // ✅ Bewerken van style.css
 public function editCss() {
-    $path = resource_path('css/style.css');
+    // Gebruik public_path voor toegang tot bestanden in de public directory
+    $path = public_path('css/style.css');
     $content = File::exists($path) ? File::get($path) : '';
-    return view('admin.files.edit_single', ['name' => 'resources/css/style.css', 'route' => route('admin.files.css.update'), 'content' => $content]);
+    
+    // Retourneer de view met de juiste gegevens
+    return view('admin.files.edit_single', [
+        'name' => 'public/css/style.css', 
+        'route' => route('admin.files.css.update'), 
+        'content' => $content
+    ]);
 }
 
 public function updateCss(Request $request) {
@@ -197,7 +202,7 @@ public function essentials()
         'agenda.blade.php',
         'contact.blade.php',
         'layouts/app.blade.php',
-        'resources/css/style.css',
+        'public/css/style.css',
         'routes/web.php',
         'app/Http/Controllers/ChatController.php', // Toegevoegd: ChatController
         'app/Http/Controllers/AdminFileController.php', // Toegevoegd: AdminFileController
@@ -207,13 +212,13 @@ public function essentials()
     $bladeFiles = collect($belangrijkeBestanden)
         ->filter(fn($name) => File::exists(resource_path('views/' . $name)) || 
                               $name === 'routes/web.php' || 
-                              $name === 'resources/css/style.css' || 
+                              $name === 'public/css/style.css' || 
                               File::exists(base_path($name)))  // Toegevoegd: Controle op controllers
         ->map(fn($name) => [
             'name' => $name,
             'edit_route' => match (true) {
                 $name === 'routes/web.php' => route('admin.special.web'),
-                $name === 'resources/css/style.css' => route('admin.files.css'),
+                $name === 'public/css/style.css' => route('admin.files.css'),
                 $name === 'layouts/app.blade.php' => route('admin.files.menu'),
                 $name === 'app/Http/Controllers/ChatController.php' => route('admin.files.controller.edit', ['name' => 'ChatController.php']),
                 $name === 'app/Http/Controllers/AdminFileController.php' => route('admin.files.controller.edit', ['name' => 'AdminFileController.php']),

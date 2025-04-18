@@ -18,7 +18,9 @@
 
     <form method="POST" action="{{ route('admin.files.controller.update', ['name' => $name]) }}">
         @csrf
-        <textarea id="code" name="content">{{ $content }}</textarea>
+        <div class="editor-container">
+            <textarea id="code" name="content">{{ $content }}</textarea>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary mt-3">Opslaan</button>
     </form>
@@ -45,15 +47,31 @@
         if (textarea) {
             const editor = CodeMirror.fromTextArea(textarea, {
                 lineNumbers: true,
-                mode: "application/x-httpd-php",
+                mode: "application/x-httpd-php",  // Verander dit afhankelijk van bestandstype
                 matchBrackets: true,
                 theme: "material-darker",
                 tabSize: 4,
                 indentUnit: 4,
                 indentWithTabs: true,
             });
-            editor.setSize("100%", "500px");
+            editor.setSize("100%", "100%");  // Maakt de editor resizeable
         }
     });
 </script>
 @endsection
+
+<style>
+    /* Zorg ervoor dat de editor-container resizeable is */
+    .editor-container {
+        position: relative;
+        width: 100%;
+        height: 500px;  /* Pas de hoogte aan naar wens */
+        resize: both;
+        overflow: hidden;
+    }
+
+    /* Zorg ervoor dat de CodeMirror editor zich aanpast aan de container */
+    .CodeMirror {
+        height: 100%;
+    }
+</style>

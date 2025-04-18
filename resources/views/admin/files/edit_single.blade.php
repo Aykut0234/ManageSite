@@ -10,7 +10,9 @@
 
     <form method="POST" action="{{ $route }}">
         @csrf
-        <textarea id="code" name="content">{{ old('content', $content) }}</textarea>
+        <div class="editor-container">
+            <textarea id="code" name="content">{{ old('content', $content) }}</textarea>
+        </div>
         <br>
         <button type="submit" class="btn btn-primary">Opslaan</button>
     </form>
@@ -18,6 +20,7 @@
 @endsection
 
 @section('scripts')
+<!-- ✅ CodeMirror styles + scripts -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
@@ -44,7 +47,25 @@
             indentWithTabs: true,
         });
 
-        editor.setSize("100%", "500px");
+        // Zorg ervoor dat de editor de container opvult
+        editor.setSize("100%", "100%");  // Gebruik 100% breedte en hoogte van de container
     });
 </script>
+
 @endsection
+
+<style>
+    /* Zorg ervoor dat de editor-container resizeable is */
+    .editor-container {
+        position: relative;
+        width: 100%;
+        height: 500px; /* Pas de hoogte aan naar wens */
+        resize: both;
+        overflow: hidden;
+    }
+
+    /* Als de editor groeit, stel de overflow in op auto */
+    .CodeMirror {
+        height: 100%;
+    }
+</style>
