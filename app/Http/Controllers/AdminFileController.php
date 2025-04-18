@@ -20,24 +20,24 @@ class AdminFileController extends Controller
         return view('admin.files.blades', compact('bladeFiles'));
     }
 
-    // Bewerk een specifiek bladae-bestand
+    // Bewerk een specifiek blade-bestand
     public function editBlade($name)
-{
-    $name = urldecode($name);
-    $fullPath = resource_path('views/' . $name);
+    {
+        // Decodeer de naam van het bestand, zodat we ook URL-encoded bestandsnamen kunnen verwerken
+        $name = urldecode($name);
+        $fullPath = resource_path('views/' . $name);
 
-    if (!file_exists($fullPath)) {
-        abort(404, 'Bestand niet gevonden');
+        if (!file_exists($fullPath)) {
+            abort(404, 'Bestand niet gevonden');
+        }
+
+        $content = File::get($fullPath);
+
+        return view('admin.files.edit_blade', [
+            'name' => $name,
+            'content' => $content,
+        ]);
     }
-
-    $content = File::get($fullPath);
-
-    return view('admin.files.edit_blade', [
-        'name' => $name,
-        'content' => $content,
-    ]);
-}
-
 
     // Opslaan van wijzigingen in blade
     public function updateBlade(Request $request, $name)
@@ -100,7 +100,8 @@ public function controllers()
 // Bewerk specifieke controller
 public function editController($name)
 {
-    $name = urldecode($name); // Decodeer de naam van de controller
+    // Decodeer de naam van de controller
+    $name = urldecode($name); 
     $fullPath = app_path('Http/Controllers/' . $name);
 
     if (!file_exists($fullPath)) {
@@ -112,6 +113,7 @@ public function editController($name)
     return view('admin.files.edit_controller', compact('name', 'content'));
 }
 
+// Opslaan van wijzigingen in controller
 public function updateController(Request $request, $name)
 {
     $path = app_path('Http/Controllers/' . $name);
