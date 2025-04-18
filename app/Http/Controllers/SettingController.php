@@ -15,24 +15,32 @@ class SettingController extends Controller
     }
 
     public function uploadLogo(Request $request)
-    {
-        // Validatie van het logo bestand
-        $request->validate([
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    // Validatie voor het logo
+    $request->validate([
+        'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        $setting = Setting::firstOrCreate([]);
-
-        // Verwijder het oude logo als het er is
-        if ($setting->logo) {
-            Storage::delete('public/' . $setting->logo);
-        }
-
-        // Upload het nieuwe logo
-        $logoPath = $request->file('logo')->store('logos', 'public');
+    // Controleer of er een bestand is geüpload
+    if ($request->hasFile('logo')) {
+        $logo = $request->file('logo');
         
-        $setting->update(['logo' => $logoPath]);
+        // Sla het bestand op in de public opslag (storage/app/public)
+        $path = $logo->store('logos', 'public'); // 'logos' is de map waar het bestand wordt opgeslagen
 
-        return back()->with('success', 'Logo succesvol geüpdatet!');
+        // Verkrijg het relatieve pad voor opslaan in je database (optioneel)
+        $logoPath = 'storage/' . $path;
+
+        // Sla de pad in je instellingen of database op
+        $setting = Setting::first(); // of zoek je instelling op
+        $setting->logo = $logoPath;  // sla het logo pad op
+        $setting->save();
+
+        // Geef een succesbericht terug
+        return redirect()->back()->with('success', 'Logo succesvol geüpload');
     }
+
+    return redirect()->back()->with('error', 'Geen bestand geselecteerd');
+}
+
 }

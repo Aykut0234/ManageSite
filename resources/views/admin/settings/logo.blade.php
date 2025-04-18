@@ -16,11 +16,10 @@
             </form>
 
             @if($setting && $setting->logo)
-                <div class="current-logo mt-4">
-                    <h3 class="current-logo-title">Huidig Logo:</h3>
-                    <img src="{{ asset('storage/' . $setting->logo) }}" alt="Logo" class="current-logo-img">
-                </div>
-            @endif
+    <h3>Huidig Logo:</h3>
+    <img src="{{ asset($setting->logo) }}" alt="Logo" class="img-fluid mt-3" style="max-height: 100px;">
+@endif
+
         </div>
     </div>
 @endsection
