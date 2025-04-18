@@ -15,32 +15,35 @@ class SettingController extends Controller
     }
 
     public function uploadLogo(Request $request)
-{
-    // Validatie voor het logo
-    $request->validate([
-        'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
-
-    // Controleer of er een bestand is geüpload
-    if ($request->hasFile('logo')) {
-        $logo = $request->file('logo');
-        
-        // Sla het bestand op in de public opslag (storage/app/public)
-        $path = $logo->store('logos', 'public'); // 'logos' is de map waar het bestand wordt opgeslagen
-
-        // Verkrijg het relatieve pad voor opslaan in je database (optioneel)
-        $logoPath = 'storage/' . $path;
-
-        // Sla de pad in je instellingen of database op
-        $setting = Setting::first(); // of zoek je instelling op
-        $setting->logo = $logoPath;  // sla het logo pad op
-        $setting->save();
-
-        // Geef een succesbericht terug
-        return redirect()->back()->with('success', 'Logo succesvol geüpload');
+    {
+        // Validatie voor het logo bestand
+        $request->validate([
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        // Controleer of er een bestand is geüpload
+        if ($request->hasFile('logo')) {
+            // Verkrijg het bestand
+            $logo = $request->file('logo');
+            
+            // Sla het bestand op in de public map
+            $path = $logo->store('logos', 'public'); // Het bestand wordt opgeslagen in storage/app/public/logos
+    
+            // Verkrijg het relatieve pad voor de toegang via de webserver
+            $logoPath = 'storage/' . $path; // De link naar het bestand, het zal iets zijn als 'storage/logos/yourimage.jpg'
+    
+            // Sla het bestandspad op in de database of instelling
+            $setting = Setting::first(); // Of haal je instelling op
+            $setting->logo = $logoPath;
+            $setting->save();
+    
+            // Redirect met succesmelding
+            return redirect()->back()->with('success', 'Logo succesvol geüpload');
+        }
+    
+        // Als er geen bestand is geüpload
+        return redirect()->back()->with('error', 'Geen bestand geselecteerd');
     }
-
-    return redirect()->back()->with('error', 'Geen bestand geselecteerd');
-}
+    
 
 }
