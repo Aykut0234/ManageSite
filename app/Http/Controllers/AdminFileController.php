@@ -38,23 +38,16 @@ class AdminFileController extends Controller
         ]);
     }
     // Opslaan van wijzigingen in blade
-    public function updateBlade(Request $request, $name)
+    public function updateBlade(Request $request)
     {
-        // Decodeer de naam indien nodig
-        $name = urldecode($name);
-    
-        // Stel het pad van het bestand in
+        $name = urldecode($request->query('name'));
         $path = resource_path('views/' . $name);
-        abort_unless(File::exists($path), 404); // Controleer of het bestand bestaat
     
-        // Sla de inhoud van het bestand op
+        abort_unless(File::exists($path), 404);
+    
         File::put($path, $request->input('content'));
-    
         return redirect()->back()->with('success', 'Bestand opgeslagen.');
     }
-    
-    
-
     // Formulier voor nieuw blade-bestand
 public function createBlade()
 {
