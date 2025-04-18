@@ -44,7 +44,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     Route::prefix('controllers')->group(function () {
         Route::get('/', [AdminFileController::class, 'controllers'])->name('admin.files.controllers');
-        Route::get('/edit/{name}', [AdminFileController::class, 'editController'])->name('admin.files.controller.edit');
+        Route::get('/admin/controllers/edit/{name}', [AdminFileController::class, 'editController'])->name('admin.files.controller.edit');
+        
         Route::post('/edit/{name}', [AdminFileController::class, 'updateController'])->name('admin.files.controller.update');
     });
 
