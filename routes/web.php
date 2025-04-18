@@ -32,15 +32,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/chat/{userId}/send', [ChatController::class, 'sendAdminMessage'])->name('chat.admin.send');
 
     // ✅ Files
-<<<<<<< Updated upstream
-    Route::prefix('files')->group(function () {
-        Route::get('/blades', [AdminFileController::class, 'blades'])->name('admin.files.blades');
-        Route::get('/blade/edit/{name}', [AdminFileController::class, 'editBlade'])->name('admin.files.blade.edit');
-        Route::post('/blade/edit/{name}', [AdminFileController::class, 'updateBlade'])->name('admin.files.blade.update');
-        Route::get('/blade/create', [AdminFileController::class, 'createBlade'])->name('admin.files.blade.create');
-        Route::post('/blade/create', [AdminFileController::class, 'storeBlade'])->name('admin.files.blade.store');
-        Route::get('/files/essentials', [AdminFileController::class, 'essentials'])->name('admin.files.essentials');
-=======
 // ✅ Files Routes
 Route::prefix('files')->group(function () {
     Route::get('/blades', [AdminFileController::class, 'blades'])->name('admin.files.blades');
@@ -51,7 +42,6 @@ Route::prefix('files')->group(function () {
     Route::post('/blade/create', [AdminFileController::class, 'storeBlade'])->name('admin.files.blade.store');
     Route::get('/files/essentials', [AdminFileController::class, 'essentials'])->name('admin.files.essentials');
 });
->>>>>>> Stashed changes
 
     });
 
@@ -79,7 +69,7 @@ Route::prefix('files')->group(function () {
     Route::get('/pages', function () {
         return view('admin.pages.index');
     })->name('admin.pages.index');
-});
+
 
 // ✅ Gebruiker-routes
 Route::middleware(['auth', 'role:gebruiker'])->group(function () {
