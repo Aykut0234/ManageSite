@@ -90,39 +90,41 @@ public function storeBlade(Request $request)
 // Toon lijst met controllers
 public function controllers()
 {
-    $files = collect(\File::allFiles(app_path('Http/Controllers')))
+    $files = collect(File::allFiles(app_path('Http/Controllers')))
         ->filter(fn($file) => str_ends_with($file->getFilename(), '.php'));
 
     return view('admin.files.controllers', compact('files'));
 }
 
 // Bewerk specifieke controller
-public function editController($name)
+public function editController(Request $request)
 {
-    $name = urldecode($name); // Decodeer de naam van de controller
+    $name = urldecode($request->query('name'));
     $fullPath = app_path('Http/Controllers/' . $name);
 
     if (!file_exists($fullPath)) {
         abort(404, 'Controller niet gevonden');
     }
 
-    $content = \File::get($fullPath); // Haal de inhoud van de controller op
+    $content = File::get($fullPath);
 
     return view('admin.files.edit_controller', compact('name', 'content'));
 }
 
-public function updateController(Request $request, $name)
+public function updateController(Request $request)
 {
+    $name = urldecode($request->query('name'));
     $path = app_path('Http/Controllers/' . $name);
 
     if (!file_exists($path)) {
         abort(404, 'Controller niet gevonden');
     }
 
-    \File::put($path, $request->input('content')); // Werk de controller bij
+    File::put($path, $request->input('content'));
 
     return back()->with('success', 'Controller succesvol opgeslagen.');
 }
+
 
 // ✅ Bewerken van web.php
 public function webFile()

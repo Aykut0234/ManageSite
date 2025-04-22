@@ -70,9 +70,11 @@ Route::prefix('files')->group(function () {
 
     Route::prefix('controllers')->group(function () {
         Route::get('/', [AdminFileController::class, 'controllers'])->name('admin.files.controllers');
-        Route::get('/edit/{name}', [AdminFileController::class, 'editController'])->name('admin.files.controller.edit');
-        Route::post('/edit/{name}', [AdminFileController::class, 'updateController'])->name('admin.files.controller.update');
+        Route::get('/edit', [AdminFileController::class, 'editController'])->name('admin.files.controller.edit');
+        Route::post('/edit', [AdminFileController::class, 'updateController'])->name('admin.files.controller.update');
+        
     });
+    
 
     Route::prefix('special')->group(function () {
         Route::get('/web', [AdminFileController::class, 'webFile'])->name('admin.special.web');
