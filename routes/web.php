@@ -116,6 +116,13 @@ Route::get('/programma', fn () => view('programma'))->name('programma');
 Route::get('/nieuws', fn () => view('nieuws'))->name('nieuws');
 Route::get('/agenda', fn () => view('agenda'))->name('agenda');
 Route::get('/contact', fn () => view('contact'))->name('contact');
+Route::get('/taal/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'fr', 'ru', 'am', 'nl'])) {
+        session(['locale' => $locale]);
+    }
+    return back(); // blijft op dezelfde pagina
+})->name('locale.set');
+
 
 // ✅ Profielroutes (voor alle ingelogde gebruikers)
 Route::middleware('auth')->group(function () {

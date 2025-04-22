@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => RoleMiddleware::class,
         ]);
+
+        // ✅ Globaal toepassen op de "web" middlewaregroep
+        $middleware->appendToGroup('web', \App\Http\Middleware\LocaleMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -1,7 +1,7 @@
 <footer class="main-footer">
     <div class="container footer-content">
         <div>
-            <h3>🏢 Over Ons</h3>
+            <h3>🏢 {{ __('about_us') }}</h3>
             <p>
                 Voorbeeldstraat 123<br>
                 1234 AB Stad<br>
@@ -10,17 +10,17 @@
             </p>
         </div>
         <div>
-            <h3>🔗 Navigatie</h3>
+            <h3>🔗 {{ __('navigation') }}</h3>
             <ul>
-                <li><a href="{{ route('dashboard.openbaar') }}">Home</a></li>
-                <li><a href="{{ route('overons') }}">Over ons</a></li>
-                <li><a href="{{ route('programma') }}">Programma</a></li>
-                <li><a href="{{ route('nieuws') }}">Nieuws</a></li>
-                <li><a href="{{ route('contact') }}">Contact</a></li>
+                <li><a href="{{ route('dashboard.openbaar') }}">{{ __('home') }}</a></li>
+                <li><a href="{{ route('overons') }}">{{ __('about_us') }}</a></li>
+                <li><a href="{{ route('programma') }}">{{ __('program') }}</a></li>
+                <li><a href="{{ route('nieuws') }}">{{ __('news') }}</a></li>
+                <li><a href="{{ route('contact') }}">{{ __('contact') }}</a></li>
             </ul>
         </div>
         <div>
-            <h3>📱 Volg ons</h3>
+            <h3>📱 {{ __('follow_us') }}</h3>
             <ul>
                 <li><a href="#">Facebook</a></li>
                 <li><a href="#">Instagram</a></li>
