@@ -31,4 +31,10 @@ return [
         ],
     ],
 
+     
+        'mollie' => [
+            'key' => env('MOLLIE_API_KEY'),
+        
+    ],
+
 ];

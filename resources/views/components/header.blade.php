@@ -20,6 +20,8 @@
         <li><a href="{{ route('programma') }}">Programma</a></li>
         <li><a href="{{ route('agenda') }}">Agenda</a></li>
         <li><a href="{{ route('contact') }}">Contact</a></li>
+        <li><a href="{{ route('donatie.index') }}">💖 Doneren</a>
+        </li> {{-- ✅ Donatie knop --}}
 
         @auth
         @role('admin')
@@ -56,21 +58,17 @@
             <li><a href="{{ route('register') }}">📝 Registreren</a></li>
         @endauth
 
-        <!-- Dropdown voor taalkeuze -->
-   <!-- Dropdown voor taalkeuze -->
-<!-- Dropdown voor taalkeuze -->
-<li class="dropdown">
-    <a href="#" class="dropdown-toggle" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        🌍 Taal
-    </a>
-    <div class="dropdown-menu" aria-labelledby="languageDropdown">
-        <a class="dropdown-item" href="{{ route('locale.set', 'en') }}">English</a>
-        <a class="dropdown-item" href="{{ route('locale.set', 'fr') }}">Français</a>
-        <a class="dropdown-item" href="{{ route('locale.set', 'ru') }}">Русский</a>
-        <a class="dropdown-item" href="{{ route('locale.set', 'am') }}">Հայերեն</a>
-    </div>
-</li>
-
-
+        {{-- 🌍 Taalkeuze dropdown --}}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                🌍 Taal
+            </a>
+            <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                <a class="dropdown-item" href="{{ route('locale.set', 'en') }}">English</a>
+                <a class="dropdown-item" href="{{ route('locale.set', 'fr') }}">Français</a>
+                <a class="dropdown-item" href="{{ route('locale.set', 'ru') }}">Русский</a>
+                <a class="dropdown-item" href="{{ route('locale.set', 'am') }}">Հայերեն</a>
+            </div>
+        </li>
     </ul>
 </header>

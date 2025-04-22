@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Mollie\Api\MollieApiClient;
+use Illuminate\Support\Facades\Config; // ✅ Voeg deze regel toe
 
 class MolliePaymentService
 {
@@ -11,7 +12,7 @@ class MolliePaymentService
     public function __construct()
     {
         $this->mollie = new MollieApiClient();
-        $this->mollie->setApiKey(env('MOLLIE_API_KEY'));
+        $this->mollie->setApiKey(Config::get('services.mollie.key')); // 👈 juiste manier
     }
 
     public function createPayment($amount, $description)
