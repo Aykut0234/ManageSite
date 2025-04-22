@@ -15,13 +15,10 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primary mt-3">Opslaan</button>
-        <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px; float: right;">
-        ← Terug
-    </a>
+        <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3">
+            ← Terug
+        </a>
     </form>
-
-    <!-- Terugknop rechts uitlijnen -->
- 
 </div>
 @endsection
 
@@ -52,26 +49,26 @@
                 indentUnit: 4,
                 indentWithTabs: true,
             });
-            editor.setSize("100%", "500px"); // De editor past zich aan de breedte en hoogte van de container aan
+            editor.setSize("100%", "100vh"); // Maak de editor 100% van de breedte en hoogte van het scherm
         }
     });
 </script>
 @endsection
 
 <style>
-    /* Zorg ervoor dat de editor-container resizeable is */
+    /* Zorg ervoor dat de editor-container de volledige ruimte gebruikt */
     .editor-container {
         position: relative;
         width: 100%;
-        height: 500px;  /* Pas de hoogte aan naar wens */
+        height: 100vh; /* Maak de container de volledige hoogte van het scherm */
         resize: both;
         overflow: hidden;
     }
 
-    /* Zorg ervoor dat de CodeMirror editor zich aanpast aan de container */
+    /* Zorg ervoor dat de CodeMirror editor de volledige container vult */
     .CodeMirror {
-        height: 100%;
-        width: 100%; /* Zorg ervoor dat de editor 100% breedte heeft */
+        height: 100% !important;
+        width: 100% !important;
     }
 
     /* Stijl voor de terugknop rechts */

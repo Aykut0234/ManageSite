@@ -16,11 +16,9 @@
         <br>
         <button type="submit" class="btn btn-primary">Opslaan</button>
         <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px; float: right;">
-        ← Terug
-    </a>
+            ← Terug
+        </a>
     </form>
-
-    
 </div>
 @endsection
 
@@ -39,10 +37,12 @@
         const filename = @json($name);
         let mode = "application/x-httpd-php";
 
+        // Kies de juiste mode op basis van de bestandsnaam
         if (filename.includes('.css')) mode = "css";
         else if (filename.includes('.blade.php')) mode = "htmlmixed";
         else if (filename.includes('.js')) mode = "javascript";
 
+        // Initialiseer de CodeMirror-editor
         const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             lineNumbers: true,
             mode: mode,
@@ -56,21 +56,26 @@
         editor.setSize("100%", "100%");  // Gebruik 100% breedte en hoogte van de container
     });
 </script>
-
 @endsection
 
 <style>
-    /* Zorg ervoor dat de editor-container resizeable is */
+    /* Zorg ervoor dat de editor-container de volledige ruimte gebruikt */
     .editor-container {
         position: relative;
         width: 100%;
-        height: 500px; /* Pas de hoogte aan naar wens */
+        height: 80vh;  /* De container gebruikt 80% van de hoogte van de viewport */
         resize: both;
         overflow: hidden;
     }
 
-    /* Als de editor groeit, stel de overflow in op auto */
+    /* Zorg ervoor dat de CodeMirror editor zich aanpast aan de container */
     .CodeMirror {
-        height: 100%;
+        height: 100% !important;
+        width: 100% !important;  /* Zorg ervoor dat de editor de volledige breedte en hoogte gebruikt */
+    }
+
+    /* Stijl voor de terugknop rechts */
+    .btn-secondary {
+        float: right;
     }
 </style>

@@ -8,16 +8,13 @@
             💬 Chat met gebruiker #{{ $userId }}
         </h2>
 
+        <!-- Retour-knop -->
+
         <!-- Chatberichten -->
         <div style="max-height: 400px; overflow-y: auto; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; background-color: #f8fafc; margin-bottom: 24px;">
             @forelse($messages as $msg)
                 <div style="margin-bottom: 16px;">
-                    <div style="background-color: {{ $msg->is_admin_sender ? '#e0f2fe' : '#f1f5f9' }};
-                                color: #1e293b;
-                                padding: 12px 16px;
-                                border-radius: 10px;
-                                max-width: 75%;
-                                @if($msg->is_admin_sender) margin-left: auto; text-align: right; @endif">
+                    <div style="background-color: {{ $msg->is_admin_sender ? '#e0f2fe' : '#f1f5f9' }}; color: #1e293b; padding: 12px 16px; border-radius: 10px; max-width: 75%; @if($msg->is_admin_sender) margin-left: auto; text-align: right; @endif">
                         <div style="font-weight: 600; margin-bottom: 4px;">
                             {{ $msg->is_admin_sender ? '👨‍💼 Admin' : '👤 Gebruiker' }}
                         </div>
@@ -37,7 +34,16 @@
             @csrf
             <label for="message">✍️ Bericht</label>
             <textarea name="message" class="form-control" rows="3" required style="margin-top: 8px; margin-bottom: 16px;"></textarea>
-            <button type="submit" class="btn">Verstuur</button>
+            
+            <!-- Knoppen container met Flexbox -->
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <!-- Verzenden knop aan de linkerkant -->
+                <button type="submit" class="btn">Verstuur</button>
+                <!-- Terug-knop aan de rechterkant -->
+                <a href="{{ route('chat.admin.list') }}" class="btn btn-secondary mb-3">
+                    ← Terug naar Chats
+                </a>
+            </div>
         </form>
 
     </div>

@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_name',  // Voeg achternaam toe
+        'phone_number',  // Voeg telefoonnummer toe
     ];
 
     /**

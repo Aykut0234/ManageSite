@@ -15,9 +15,7 @@ a {
     transition: color 0.3s ease;
 }
 
-a:hover {
-    color: #0a58ca;
-}
+
 
 /* ✅ Container */
 .container, .content, .footer-content {
@@ -714,3 +712,133 @@ ul li:hover {
     border: 1px solid #f5c2c7;
 }
 
+/* Zorg ervoor dat de logo's netjes in kolommen worden weergegeven */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-upload {
+    width: 100%;
+}
+
+.btn-danger {
+    width: 100%;
+}
+/* ✅ Tabel Styling */
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+table.table thead {
+    background-color: #f1f5f9;
+}
+
+table.table th,
+table.table td {
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid #e2e8f0;
+}
+
+table.table th {
+    font-weight: bold;
+    color: #1e293b;
+}
+
+table.table td {
+    color: #334155;
+}
+
+table.table tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+table.table tr:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}
+
+/* ✅ Alert styling */
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* ✅ Buttons */
+.btn {
+    background-color: #0d6efd;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    table.table th,
+    table.table td {
+        padding: 8px 12px;
+    }
+
+    table.table {
+        font-size: 14px;
+    }
+    /* ✅ Buttons */
+/* ✅ Stijl voor de tekstweergave in de frontend */
+.file-item {
+    background-color: #f9fafb;
+    padding: 16px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.2s;
+    width: 22%; /* Breedte per item */
+    min-width: 200px;
+    overflow: hidden;  /* Verhindert dat tekst buiten het vak gaat */
+    white-space: nowrap;  /* Zorgt ervoor dat de tekst op één regel blijft */
+    text-overflow: ellipsis; /* Voegt "..." toe als de tekst te lang is */
+    display: block;
+    word-wrap: break-word;  /* Zorgt ervoor dat lange woorden ook kunnen breken */
+}
+
+.file-item .btn-link {
+    color: #0d6efd;
+    font-size: 17px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.file-item .btn-link:hover {
+    color: #0a58ca;
+}
+
+
+}

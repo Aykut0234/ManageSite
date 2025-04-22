@@ -22,7 +22,12 @@ Route::get('/', function () {
     
 // Route om de taal te wijzigen
 
+
+
+
 });
+
+
 
 // ✅ Admin-routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
@@ -34,6 +39,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     // Route om geüploade logo's weer te geven
     Route::get('/settings/logo', [SettingController::class, 'showLogos'])->name('admin.settings.logo');
+    // Route om een logo te verwijderen
+Route::delete('/admin/settings/logo/delete/{filename}', [SettingController::class, 'deleteLogo'])->name('admin.settings.logo.delete');
+Route::get('/gebruikers', [SettingController::class, 'showUsers'])->name('admin.users.list');
+
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
@@ -93,6 +102,8 @@ Route::middleware(['auth', 'role:gebruiker'])->group(function () {
     Route::post('/chat/send', [ChatController::class, 'sendUserMessage'])->name('chat.user.send');
 });
 
+
+
 // ✅ Openbare pagina’s
 Route::get('/locale/{locale}', [SettingController::class, 'setLanguage'])->name('locale.set');
 
@@ -110,6 +121,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 // ✅ Laravel Breeze Auth
 require __DIR__.'/auth.php';

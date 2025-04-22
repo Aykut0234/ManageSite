@@ -5,6 +5,8 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
@@ -49,6 +51,22 @@ class SettingController extends Controller
 
         return view('admin.settings.logo', compact('logos'));
     }
+
+
+    public function deleteLogo($filename)
+{
+    // Het volledige pad naar het bestand
+    $filePath = storage_path('app/public/logos/' . $filename);
+
+    // Controleer of het bestand bestaat
+    if (File::exists($filePath)) {
+        // Verwijder het bestand
+        File::delete($filePath);
+        return redirect()->back()->with('success', 'Logo succesvol verwijderd');
+    }
+
+    return redirect()->back()->with('error', 'Bestand niet gevonden');
+}
 
     // Wijzig de taal en sla deze op in de sessie
     public function setLanguage($locale)
@@ -114,6 +132,17 @@ class SettingController extends Controller
         // Return the translations for the current language
         return $translations[$language];
     }
+
+   // app/Http/Controllers/SettingController.php
+
+
+public function showUsers()
+{
+    // Haal alleen gebruikers op die de 'gebruiker' rol hebben
+    $users = User::role('gebruiker')->get();
+    return view('admin.gebruikers', compact('users'));
+}
+
 }
 
 
