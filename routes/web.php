@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminFileController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\DonationController;
+use App\Http\Controllers\DonatieController;
 
 
 use App\Http\Controllers\ChatController;
@@ -125,10 +125,11 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/doneren', [DonationController::class, 'showDonationPage'])->name('doneren');
-Route::post('/doneren', [DonationController::class, 'createPayment'])->name('donation.create');
-Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
-Route::post('/donation/webhook', [DonationController::class, 'webhook'])->name('donation.webhook');
+
+Route::get('/doneren', [DonatieController::class, 'index'])->name('donatie.index');
+Route::post('/doneren', [DonatieController::class, 'betalen'])->name('donatie.betalen');
+Route::get('/donatie/succes', [DonatieController::class, 'succes'])->name('donatie.succes');
+Route::post('/donatie/webhook', [DonatieController::class, 'webhook'])->name('donatie.webhook');
 
 
 // ✅ Laravel Breeze Auth
