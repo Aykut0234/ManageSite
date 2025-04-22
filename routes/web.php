@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminFileController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\DonationController;
+
 
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Auth;
@@ -121,6 +123,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::get('/doneren', [DonationController::class, 'showDonationPage'])->name('doneren');
+Route::post('/doneren', [DonationController::class, 'createPayment'])->name('donation.create');
+Route::get('/donation/success', [DonationController::class, 'success'])->name('donation.success');
+Route::post('/donation/webhook', [DonationController::class, 'webhook'])->name('donation.webhook');
 
 
 // ✅ Laravel Breeze Auth
