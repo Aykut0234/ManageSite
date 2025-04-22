@@ -35,7 +35,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
  // Route om logo te uploaden
  // Route voor het wijzigen van de taal
-
+    
 
  Route::post('/settings/logo/upload', [SettingController::class, 'uploadLogo'])->name('admin.settings.logo.upload');
 
@@ -64,6 +64,10 @@ Route::prefix('files')->group(function () {
     Route::get('/blade/create', [AdminFileController::class, 'createBlade'])->name('admin.files.blade.create');
     Route::post('/blade/create', [AdminFileController::class, 'storeBlade'])->name('admin.files.blade.store');
     Route::get('/files/essentials', [AdminFileController::class, 'essentials'])->name('admin.files.essentials');
+    Route::get('/json/{name}', [AdminFileController::class, 'editJson'])->name('admin.files.json.edit'); // ✅ VERPLAATST HIER
+    Route::post('/files/json/{name}', [AdminFileController::class, 'updateJson'])->name('admin.files.json.update');
+
+
 });
 
     });
@@ -86,10 +90,11 @@ Route::prefix('files')->group(function () {
         Route::get('/menu', [AdminFileController::class, 'editMenu'])->name('admin.files.menu');
         Route::post('/menu', [AdminFileController::class, 'updateMenu'])->name('admin.files.menu.update');
         
-        
+
 
         
     });
+    
 
     Route::get('/pages', function () {
         return view('admin.pages.index');

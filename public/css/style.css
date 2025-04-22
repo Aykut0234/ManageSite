@@ -840,5 +840,20 @@ table.table tr:hover {
     color: #0a58ca;
 }
 
+/* Toon dropdown bij hover */
+.lang-switch:hover .flag-dropdown {
+    display: block;
+}
+
+/* Voorkom trillen door focus */
+.flag-toggle {
+    text-decoration: none;
+    outline: none;
+}
+
+/* Maak dropdown stabiel */
+.flag-dropdown a {
+    display: inline-block;
+}
 
 }

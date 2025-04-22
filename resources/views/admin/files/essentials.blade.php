@@ -3,22 +3,20 @@
 @section('content')
 <div class="container">
     <div class="info-card">
-
         <div class="header">
             <h2>📂 Belangrijke Bestanden</h2>
         </div>
 
-        <!-- Blade Bestanden Sectie -->
+        {{-- Blade Bestanden --}}
         <div class="section">
             <h3 class="section-title">📄 Blade-bestanden</h3>
-            @if ($bladeFiles->where(fn($file) => str_ends_with($file['name'], '.blade.php'))->isNotEmpty())
+            @php $bladeSorted = $bladeFiles->where(fn($f) => str_ends_with($f['name'], '.blade.php'))->sortBy(fn($f) => $f['name'] === 'components/header.blade.php' ? '0' : ($f['name'] === 'components/footer.blade.php' ? '2' : '1')) @endphp
+            @if ($bladeSorted->isNotEmpty())
                 <ul class="file-list">
-                    @foreach ($bladeFiles as $file)
-                        @if (str_ends_with($file['name'], '.blade.php'))
-                            <li class="file-item">
-                                <a href="{{ $file['edit_route'] }}" class="btn-link">{{ basename($file['name']) }}</a>
-                            </li>
-                        @endif
+                    @foreach ($bladeSorted as $file)
+                        <li class="file-item">
+                            <a href="{{ $file['edit_route'] }}" class="btn-link">{{ basename($file['name']) }}</a>
+                        </li>
                     @endforeach
                 </ul>
             @else
@@ -26,10 +24,10 @@
             @endif
         </div>
 
-        <!-- CSS Bestanden Sectie -->
+        {{-- CSS Bestanden --}}
         <div class="section">
             <h3 class="section-title">📝 CSS Bestanden</h3>
-            @if ($bladeFiles->where(fn($file) => str_ends_with($file['name'], '.css'))->isNotEmpty())
+            @if ($bladeFiles->where(fn($f) => str_ends_with($f['name'], '.css'))->isNotEmpty())
                 <ul class="file-list">
                     @foreach ($bladeFiles as $file)
                         @if (str_ends_with($file['name'], '.css'))
@@ -44,10 +42,10 @@
             @endif
         </div>
 
-        <!-- Routes Bestanden Sectie -->
+        {{-- Routes --}}
         <div class="section">
             <h3 class="section-title">🔗 Routes (web.php)</h3>
-            @if ($bladeFiles->where(fn($file) => str_ends_with($file['name'], 'web.php'))->isNotEmpty())
+            @if ($bladeFiles->where(fn($f) => str_ends_with($f['name'], 'web.php'))->isNotEmpty())
                 <ul class="file-list">
                     @foreach ($bladeFiles as $file)
                         @if (str_ends_with($file['name'], 'web.php'))
@@ -58,14 +56,14 @@
                     @endforeach
                 </ul>
             @else
-                <p class="no-files">Geen Routes-bestanden gevonden.</p>
+                <p class="no-files">Geen routebestand gevonden.</p>
             @endif
         </div>
 
-        <!-- Controllers Sectie -->
+        {{-- Controllers --}}
         <div class="section">
             <h3 class="section-title">🛠️ Controllers</h3>
-            @if ($bladeFiles->where(fn($file) => str_ends_with($file['name'], '.php') && str_contains($file['name'], 'Controllers'))->isNotEmpty())
+            @if ($bladeFiles->where(fn($f) => str_ends_with($f['name'], '.php') && str_contains($f['name'], 'Controllers'))->isNotEmpty())
                 <ul class="file-list">
                     @foreach ($bladeFiles as $file)
                         @if (str_ends_with($file['name'], '.php') && str_contains($file['name'], 'Controllers'))
@@ -76,14 +74,31 @@
                     @endforeach
                 </ul>
             @else
-                <p class="no-files">Geen Controllers gevonden.</p>
+                <p class="no-files">Geen controllers gevonden.</p>
             @endif
         </div>
-        
-        <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
+
+        {{-- JSON Taalbestanden --}}
+        <div class="section">
+            <h3 class="section-title">🌐 Taalbestanden (JSON)</h3>
+            @if ($bladeFiles->where(fn($f) => str_ends_with($f['name'], '.json'))->isNotEmpty())
+                <ul class="file-list">
+                    @foreach ($bladeFiles as $file)
+                        @if (str_ends_with($file['name'], '.json'))
+                            <li class="file-item">
+                                <a href="{{ $file['edit_route'] }}" class="btn-link">{{ basename($file['name']) }}</a>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
+            @else
+                <p class="no-files">Geen taalbestanden gevonden.</p>
+            @endif
+        </div>
+
+        <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-top: 40px;">
             ← Terug
         </a>
-        
     </div>
 </div>
 @endsection
