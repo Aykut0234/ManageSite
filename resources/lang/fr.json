@@ -79,5 +79,20 @@
   "Register": "S'inscrire",
   "Log in": "Connexion",
   "Remember me": "Se souvenir de moi",
-  "Forgot your password?": "Mot de passe oublié?"
+  "Forgot your password?": "Mot de passe oublié?",
+  "news_page.title": "Dernières nouvelles",
+  "news_page.intro": "Restez informé de nos derniers développements, événements et annonces importantes.",
+
+  "news_page.item1.title": "Nouvelle collaboration avec BeveiligingsPartner NL",
+  "news_page.item1.date": "16 avril 2025",
+  "news_page.item1.text": "Nous sommes fiers d'annoncer notre collaboration avec BeveiligingsPartner NL pour rendre nos systèmes d'alarme intelligents encore plus efficaces. Cette collaboration signifie des réductions pour les clients et un service plus rapide.",
+
+  "news_page.item2.title": "Nouvelle série d'ateliers sur les caméras intelligentes",
+  "news_page.item2.date": "10 avril 2025",
+  "news_page.item2.text": "Notre atelier populaire ‘Installer et gérer des caméras intelligentes’ revient à partir du 1er mai ! Inscrivez-vous vite via notre <a href=\"#\" class=\"btn-link\">page programme</a>.",
+
+  "news_page.item3.title": "Nous avons lancé un système de chat !",
+  "news_page.item3.date": "5 avril 2025",
+  "news_page.item3.text": "Vous pouvez désormais discuter directement avec notre équipe d'assistance via votre tableau de bord. Une question sur l'installation ou votre commande ? Nous sommes là pour vous."
+  
 }

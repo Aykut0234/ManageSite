@@ -1,5 +1,26 @@
-<aside style="width: 260px; background: linear-gradient(to bottom, #1e293b, #0f172a); color: white; padding: 24px; display: flex; flex-direction: column; min-height: 100vh;">
-    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 30px;">🌐 MijnWebsite</h2>
+<aside style="width: 260px; background: linear-gradient(to bottom, #1e293b, #0f172a); color: white; padding: 24px; display: flex; flex-direction: column; min-height: 100vh; position: relative;">
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">🌐 MijnWebsite</h2>
+
+    {{-- 🌍 Taalkeuze vlaggen direct onder MijnWebsite --}}
+    @php
+        $locale = session('locale', app()->getLocale());
+        $flags = ['en' => 'gb', 'fr' => 'fr', 'ru' => 'ru', 'am' => 'am'];
+    @endphp
+
+    <div style="position: relative; margin-bottom: 30px;">
+        <button id="langSidebarBtn" style="background: none; border: none; padding: 0;">
+            <img src="https://flagcdn.com/w40/{{ $flags[$locale] ?? 'gb' }}.png" alt="{{ strtoupper($locale) }}" width="40">
+        </button>
+        <ul id="langSidebarDropdown" style="display: none; position: absolute; top: 100%; left: 0; background: #1e293b; border: 1px solid #334155; list-style: none; padding: 8px; margin: 0; z-index: 999; border-radius: 6px;">
+            @foreach ($flags as $lang => $flag)
+                <li style="margin: 6px 0;">
+                    <a href="{{ route('locale.set', $lang) }}">
+                        <img src="https://flagcdn.com/w40/{{ $flag }}.png" alt="{{ strtoupper($lang) }}" width="40" style="display: block;">
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 
     <nav>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
@@ -7,15 +28,13 @@
             <li><a href="{{ route('overons') }}" class="sidebar-link" style="color: #fff;">ℹ️ Over ons</a></li>
             <li><a href="{{ route('standpunten') }}" class="sidebar-link" style="color: #fff;">📌 Standpunten</a></li>
             <li><a href="{{ route('nieuws') }}" class="sidebar-link" style="color: #fff;">📰 Nieuws</a></li>
-            <li><a href="{{ route('programma') }}" class="sidebar-link" style="color: #fff;">📋 Programma</a></li>
-            <li><a href="{{ route('agenda') }}" class="sidebar-link" style="color: #fff;">📅 Agenda</a></li>
             <li><a href="{{ route('contact') }}" class="sidebar-link" style="color: #fff;">📬 Contact</a></li>
 
             <hr style="border-color: #334155; margin: 16px 0;">
 
             <li><a href="{{ route('admin.users.list') }}" class="sidebar-link" style="color: #fff;">👥 Gebruikers</a></li>
             <li><a href="{{ route('admin.files.essentials') }}" class="sidebar-link" style="color: #fff;">📁 Frontend Bestanden</a></li>
-            
+
             <li>
                 <a href="{{ route('admin.settings.logo') }}" class="sidebar-link" style="color: #fff; font-weight: bold;">
                     📁 Bestanden Uploaden
@@ -55,60 +74,28 @@
 </aside>
 
 <script>
-    // Functie om de dropdown te openen of te sluiten
     function toggleSidebarDropdown() {
         const dropdown = document.getElementById('sidebarDropdown');
         const isOpen = dropdown.style.display === 'block';
         dropdown.style.display = isOpen ? 'none' : 'block';
-        // Bewaren van de status van de dropdown in localStorage
         localStorage.setItem('sidebarDropdownOpen', !isOpen);
     }
 
-    // Controleer of de dropdown open moet zijn bij het laden van de pagina
-    document.addEventListener('DOMContentLoaded', function() {
-        const currentRoute = window.location.href; // Huidige URL
-        const filesRoutes = [
-            "{{ route('admin.files.blades') }}",
-            "{{ route('admin.files.controllers') }}",
-            "{{ route('admin.special.web') }}",
-            "{{ route('admin.files.menu') }}",
-            "{{ route('admin.files.css') }}"
-        ];
-
-        // Als de huidige route overeenkomt met een van de bovenstaande routes, zorg ervoor dat de dropdown open blijft
-        if (filesRoutes.includes(currentRoute)) {
-            document.getElementById('sidebarDropdown').style.display = 'block';
-            localStorage.setItem('sidebarDropdownOpen', 'true'); // Zet de dropdown-status naar open
-        }
-
-        // Highlight de actieve menu-item
-        const menuItems = document.querySelectorAll('.menu-item');
-        menuItems.forEach(item => {
-            if (item.href === currentRoute) {
-                item.style.backgroundColor = '#0b5ed7'; // Markeer de actieve link
-                item.style.color = '#ffffff'; // Verander tekstkleur naar wit om contrast te verhogen
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const currentRoute = window.location.href;
 
-        // Alle sidebar-links
+        // Highlight actieve link
         const links = document.querySelectorAll('.sidebar-link');
-
         links.forEach(link => {
             if (link.href === currentRoute) {
-                link.style.backgroundColor = '#0b5ed7'; // Highlight kleur
-                link.style.color = '#ffffff'; // Witte tekst
+                link.style.backgroundColor = '#0b5ed7';
+                link.style.color = '#ffffff';
                 link.style.padding = '6px 10px';
                 link.style.borderRadius = '6px';
             }
         });
 
-        // Automatisch dropdown openen als het om subroutes gaat
-        const dropdown = document.getElementById('sidebarDropdown');
+        // Bestanden dropdown openen bij match
         const dropdownRoutes = [
             "{{ route('admin.files.blades') }}",
             "{{ route('admin.files.controllers') }}",
@@ -116,15 +103,25 @@
             "{{ route('admin.files.menu') }}",
             "{{ route('admin.files.css') }}"
         ];
-
-        if (dropdownRoutes.includes(currentRoute)) {
-            dropdown.style.display = 'block';
-            localStorage.setItem('sidebarDropdownOpen', 'true');
-        }
-
-        // Herstel dropdown status uit localStorage
-        if (localStorage.getItem('sidebarDropdownOpen') === 'true') {
+        const dropdown = document.getElementById('sidebarDropdown');
+        if (dropdownRoutes.includes(currentRoute) || localStorage.getItem('sidebarDropdownOpen') === 'true') {
             dropdown.style.display = 'block';
         }
+
+        // Taal dropdown
+        const langBtn = document.getElementById('langSidebarBtn');
+        const langDropdown = document.getElementById('langSidebarDropdown');
+
+        langBtn?.addEventListener('click', function (e) {
+            e.stopPropagation();
+            langDropdown.style.display = (langDropdown.style.display === 'block') ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!langDropdown.contains(e.target) && e.target !== langBtn) {
+                langDropdown.style.display = 'none';
+            }
+        });
     });
 </script>
+

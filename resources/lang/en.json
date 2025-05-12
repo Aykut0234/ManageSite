@@ -80,8 +80,21 @@
         "Register": "Register",
         "Log in": "Log in",
         "Remember me": "Remember me",
-        "Forgot your password?": "Forgot your password?"
+        "Forgot your password?": "Forgot your password?", "news_page.title": "Latest News",
+        "news_page.intro": "Stay informed about our latest developments, events, and important announcements.",
+      
+        "news_page.item1.title": "New Partnership with BeveiligingsPartner NL",
+        "news_page.item1.date": "April 16, 2025",
+        "news_page.item1.text": "We’re proud to announce a partnership with BeveiligingsPartner NL to make our smart alarm systems even more efficient. This collaboration means discounts for customers and faster service.",
+      
+        "news_page.item2.title": "New Workshop Series on Smart Cameras",
+        "news_page.item2.date": "April 10, 2025",
+        "news_page.item2.text": "Our popular workshop ‘Installing and Managing Smart Cameras’ returns starting May 1st! Sign up now via our <a href=\"#\" class=\"btn-link\">program page</a>.",
+      
+        "news_page.item3.title": "We Launched a Chat System!",
+        "news_page.item3.date": "April 5, 2025",
+        "news_page.item3.text": "You can now chat directly with our support team via your dashboard. Have a question about installation or your order? We're here for you."
+      }
     
       
       
-}
