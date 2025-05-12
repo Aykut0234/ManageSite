@@ -31,12 +31,15 @@ class AdminFileController extends Controller
         }
     
         $content = File::get($fullPath);
+        $from = $request->query('from', 'blades'); // Fallback naar 'blades'
     
         return view('admin.files.edit_blade', [
             'name' => $name,
             'content' => $content,
+            'from' => $from, // Zorg ervoor dat 'from' correct wordt doorgegeven
         ]);
     }
+    
     // Opslaan van wijzigingen in blade
     public function updateBlade(Request $request)
 {

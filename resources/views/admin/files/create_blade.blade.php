@@ -36,7 +36,9 @@
 
         <div class="d-flex justify-content-between align-items-center mt-3">
     <button type="submit" class="btn btn-success">➕ Aanmaken</button>
-    <a href="{{ url()->previous() }}" class="btn btn-secondary">← Terug</a>
+    <a href="{{ request()->headers->get('referer') }}" class="btn btn-secondary mt-3">
+        ← Terug
+    </a>
 </div>
 
     

@@ -1,0 +1,859 @@
+/* ✅ Algemene layout */
+ {
+    background-color: #f8fafc;
+    color: #1e293b;
+    margin: 0;
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+a {
+    color: #0d6efd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+
+/* ✅ Container */
+.container, .content, .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ✅ Navigatie */
+.navbar {
+    background: linear-gradient(to right, #ffffff, #f1f5f9);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 14px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.navbar a {
+    color: #1e293b;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar a:hover {
+    background-color: #e0e7ff;
+    color: #1d4ed8;
+}
+
+/* ✅ Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* ✅ Dropdown-menu standaard verbergen */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    display: none;
+
+    min-width: 220px;
+    padding: 10px 0;
+    margin-top: 8px;
+    z-index: 200;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+
+
+
+
+.dropdown-menu li {
+    padding: 10px 20px;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-menu li:hover {
+    background: #f1f5f9;
+}
+
+/* ✅ Buttons */
+.btn {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+    box-shadow: 0 2px 6px rgba(13, 110, 253, 0.2);
+}
+
+.btn:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* ✅ Forms */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+    outline: none;
+}
+
+label {
+    font-weight: 600;
+    margin-top: 16px;
+    display: block;
+    color: #334155;
+}
+
+/* ✅ Alerts */
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* ✅ Footer */
+.main-footer {
+    background-color: #f1f5f9;
+    padding: 40px 24px;
+    margin-top: 60px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 15px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-content > div h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-content li {
+    margin-bottom: 6px;
+}
+
+.footer-content a {
+    color: #1e293b;
+    transition: color 0.2s ease;
+}
+
+.footer-content a:hover {
+    color: #0d6efd;
+}
+
+/* ✅ CodeMirror editor styling fix */
+.CodeMirror {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px;
+}
+/* ✅ Sticky footer layout */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.layout-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main.content {
+    flex: 1;
+}
+
+/* ✅ Animaties */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+.news-card {
+    background-color: #f9fafb;
+    border: 1px solid #e2e8f0;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    transition: box-shadow 0.2s ease;
+}
+
+.news-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.news-title {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #1d4ed8;
+}
+
+.news-date {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.btn-link {
+    color: #0d6efd;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-link:hover {
+    border-color: #0d6efd;
+    color: #0a58ca;
+}
+.btn-link {
+    color: #0d6efd;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-link:hover {
+    border-color: #0d6efd;
+    color: #0a58ca;
+}
+.btn-link {
+    color: #0d6efd;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-link:hover {
+    border-color: #0d6efd;
+    color: #0a58ca;
+}
+.info-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.info-card h1 {
+    font-size: 32px;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.info-card h2 {
+    font-size: 24px;
+    color: #1d4ed8;
+    margin-bottom: 8px;
+}
+
+.info-card p {
+    color: #334155;
+    line-height: 1.7;
+}
+.contact-card {
+    background-color: #f9fafb;
+    border: 1px solid #e2e8f0;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    transition: box-shadow 0.2s ease;
+}
+
+.contact-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.event-card {
+    background-color: #f9fafb;
+    border: 1px solid #e2e8f0;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    transition: box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.event-title {
+    font-size: 22px;
+    color: #1d4ed8;
+    margin-bottom: 8px;
+}
+
+.event-meta {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+/* Hover effect op lijsten */
+ul li:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+}
+
+/* Link-stijl */
+.btn-link {
+    color: #1d4ed8;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-link:hover {
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+    outline: none;
+}
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+    outline: none;
+}
+/* ✅ Algemene layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.info-card {
+    background: #fff;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Header en knop styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h2 {
+    font-size: 28px;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.header .btn {
+    background-color: #0d6efd;
+    color: white;
+    padding: 8px 18px;
+    font-size: 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.header .btn:hover {
+    background-color: #0b5ed7;
+}
+
+/* ✅ Flexbox voor secties naast elkaar */
+.section {
+    margin-bottom: 40px;
+    width: 100%; /* Zorgt ervoor dat de sectie de volledige breedte gebruikt */
+}
+
+.section-title {
+    font-size: 22px;
+    color: #1e293b;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+/* ✅ Lijstweergave voor bestanden */
+.file-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap; /* Zorgt ervoor dat de items in meerdere regels komen als ze niet passen */
+    gap: 16px;
+}
+
+.file-item {
+    background-color: #f9fafb;
+    padding: 16px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.2s;
+    width: 22%; /* Breedte per item */
+    min-width: 200px; /* Zorgt ervoor dat items niet te klein worden */
+}
+
+.file-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.file-item .btn-link {
+    color: #0d6efd;
+    font-size: 17px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.file-item .btn-link:hover {
+    color: #0a58ca;
+}
+
+/* ✅ Geen bestanden bericht */
+.no-files {
+    color: #64748b;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ✅ Responsive: mobiele weergave */
+@media (max-width: 768px) {
+    .file-item {
+        width: 100%; /* Zorgt ervoor dat elk item op een nieuwe regel komt op kleine schermen */
+        min-width: unset;
+    }
+    
+    .section {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+}
+.navbar-full {
+    width: 100%;
+    background: linear-gradient(to right, #ffffff, #f1f5f9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a {
+    color: #1e293b;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-menu a:hover {
+    background: #e2e8f0;
+    color: #1d4ed8;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    min-width: 200px;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 16px;
+    color: #1e293b;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* ✅ Algemene styling voor de logo instellingen */
+.logo-settings-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Figtree', sans-serif;
+}
+
+.section-title {
+    font-size: 32px;
+    color: #1e293b;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 8px;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+    outline: none;
+}
+
+.btn-upload {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(13, 110, 253, 0.2);
+}
+
+.btn-upload:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.current-logo {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.current-logo-title {
+    font-size: 24px;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.current-logo-img {
+    max-height: 120px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+}
+
+/* ✅ Styling voor succes- of foutmeldingen */
+.alert-success, .alert-error {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+/* Zorg ervoor dat de logo's netjes in kolommen worden weergegeven */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-upload {
+    width: 100%;
+}
+
+.btn-danger {
+    width: 100%;
+}
+/* ✅ Tabel Styling */
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+table.table thead {
+    background-color: #f1f5f9;
+}
+
+table.table th,
+table.table td {
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid #e2e8f0;
+}
+
+table.table th {
+    font-weight: bold;
+    color: #1e293b;
+}
+
+table.table td {
+    color: #334155;
+}
+
+table.table tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+table.table tr:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}
+
+/* ✅ Alert styling */
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* ✅ Buttons */
+.btn {
+    background-color: #0d6efd;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    table.table th,
+    table.table td {
+        padding: 8px 12px;
+    }
+
+    table.table {
+        font-size: 14px;
+    }
+    /* ✅ Buttons */
+/* ✅ Stijl voor de tekstweergave in de frontend */
+.file-item {
+    background-color: #f9fafb;
+    padding: 16px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.2s;
+    width: 22%; /* Breedte per item */
+    min-width: 200px;
+    overflow: hidden;  /* Verhindert dat tekst buiten het vak gaat */
+    white-space: nowrap;  /* Zorgt ervoor dat de tekst op één regel blijft */
+    text-overflow: ellipsis; /* Voegt "..." toe als de tekst te lang is */
+    display: block;
+    word-wrap: break-word;  /* Zorgt ervoor dat lange woorden ook kunnen breken */
+}
+
+.file-item .btn-link {
+    color: #0d6efd;
+    font-size: 17px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.file-item .btn-link:hover {
+    color: #0a58ca;
+}
+
+/* Toon dropdown bij hover */
+.lang-switch:hover .flag-dropdown {
+    display: block;
+}
+
+/* Voorkom trillen door focus */
+.flag-toggle {
+    text-decoration: none;
+    outline: none;
+}
+
+/* Maak dropdown stabiel */
+.flag-dropdown a {
+    display: inline-block;
+}
+
+}
