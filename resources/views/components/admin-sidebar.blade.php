@@ -3,49 +3,46 @@
 
     <nav>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
-            <li><a href="{{ route('dashboard.openbaar') }}" style="color: #fff;">🏠 Home</a></li>
-            <li><a href="{{ route('overons') }}" style="color: #fff;">ℹ️ Over ons</a></li>
-            <li><a href="{{ route('standpunten') }}" style="color: #fff;">📌 Standpunten</a></li>
-            <li><a href="{{ route('nieuws') }}" style="color: #fff;">📰 Nieuws</a></li>
-            <li><a href="{{ route('programma') }}" style="color: #fff;">📋 Programma</a></li>
-            <li><a href="{{ route('agenda') }}" style="color: #fff;">📅 Agenda</a></li>
-            <li><a href="{{ route('contact') }}" style="color: #fff;">📬 Contact</a></li>
+            <li><a href="{{ route('dashboard.openbaar') }}" class="sidebar-link" style="color: #fff;">🏠 Home</a></li>
+            <li><a href="{{ route('overons') }}" class="sidebar-link" style="color: #fff;">ℹ️ Over ons</a></li>
+            <li><a href="{{ route('standpunten') }}" class="sidebar-link" style="color: #fff;">📌 Standpunten</a></li>
+            <li><a href="{{ route('nieuws') }}" class="sidebar-link" style="color: #fff;">📰 Nieuws</a></li>
+            <li><a href="{{ route('programma') }}" class="sidebar-link" style="color: #fff;">📋 Programma</a></li>
+            <li><a href="{{ route('agenda') }}" class="sidebar-link" style="color: #fff;">📅 Agenda</a></li>
+            <li><a href="{{ route('contact') }}" class="sidebar-link" style="color: #fff;">📬 Contact</a></li>
 
             <hr style="border-color: #334155; margin: 16px 0;">
 
-            <!-- Toegevoegde link naar Gebruikerslijst -->
-            <li><a href="{{ route('admin.users.list') }}" style="color: #fff;">👥 Gebruikers</a></li>
-
-            <li><a href="{{ route('admin.files.essentials') }}" style="color: #fff;">📁 Frontend Bestanden</a></li>
+            <li><a href="{{ route('admin.users.list') }}" class="sidebar-link" style="color: #fff;">👥 Gebruikers</a></li>
+            <li><a href="{{ route('admin.files.essentials') }}" class="sidebar-link" style="color: #fff;">📁 Frontend Bestanden</a></li>
             
-            <!-- Logo Aanpassen Sectie -->
-            <li class="logo-settings-item">
-                <a href="{{ route('admin.settings.logo') }}" style="color: #fff; font-weight: bold;">
-                📁 Bestanden Uploaden
+            <li>
+                <a href="{{ route('admin.settings.logo') }}" class="sidebar-link" style="color: #fff; font-weight: bold;">
+                    📁 Bestanden Uploaden
                 </a>
             </li>
 
-            {{-- ✅ Dropdown --}}
             <li class="dropdown-group">
                 <div class="dropdown-toggle" onclick="toggleSidebarDropdown()" style="cursor: pointer; font-weight: 600;">
                     ⚙️ Alle bestanden ▾
                 </div>
                 <ul id="sidebarDropdown" style="list-style: none; padding-left: 12px; margin-top: 10px; display: none; flex-direction: column; gap: 8px;">
-                    <li><a href="{{ route('admin.files.blades') }}" class="menu-item" style="color: #fff;">📄 Blade-bestanden</a></li>
-                    <li><a href="{{ route('admin.files.controllers') }}" class="menu-item" style="color: #fff;">📁 Controllers</a></li>
-                    <li><a href="{{ route('admin.special.web') }}" class="menu-item" style="color: #fff;">🛠️ Routes (web.php)</a></li>
-                    <li><a href="{{ route('admin.files.menu') }}" class="menu-item" style="color: #fff;">🧭 Menu (app.blade.php)</a></li>
-                    <li><a href="{{ route('admin.files.css') }}" class="menu-item" style="color: #fff;">🎨 CSS (style.css)</a></li>
+                    <li><a href="{{ route('admin.files.blades') }}" class="sidebar-link" style="color: #fff;">📄 Blade-bestanden</a></li>
+                    <li><a href="{{ route('admin.files.controllers') }}" class="sidebar-link" style="color: #fff;">📁 Controllers</a></li>
+                    <li><a href="{{ route('admin.special.web') }}" class="sidebar-link" style="color: #fff;">🛠️ Routes (web.php)</a></li>
+                    <li><a href="{{ route('admin.files.menu') }}" class="sidebar-link" style="color: #fff;">🧭 Menu (app.blade.php)</a></li>
+                    <li><a href="{{ route('admin.files.css') }}" class="sidebar-link" style="color: #fff;">🎨 CSS (style.css)</a></li>
                 </ul>
             </li>
 
-            <li><a href="{{ route('chat.admin.list') }}" style="color: #fff;">💬 Chats met gebruikers</a></li>
+            <li><a href="{{ route('chat.admin.list') }}" class="sidebar-link" style="color: #fff;">💬 Chats met gebruikers</a></li>
 
             <hr style="border-color: #334155; margin: 16px 0;">
 
             <li>
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                   class="sidebar-link"
                    style="color: #f87171; font-weight: bold;">
                     🚪 Uitloggen
                 </a>
@@ -92,5 +89,42 @@
                 item.style.color = '#ffffff'; // Verander tekstkleur naar wit om contrast te verhogen
             }
         });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentRoute = window.location.href;
+
+        // Alle sidebar-links
+        const links = document.querySelectorAll('.sidebar-link');
+
+        links.forEach(link => {
+            if (link.href === currentRoute) {
+                link.style.backgroundColor = '#0b5ed7'; // Highlight kleur
+                link.style.color = '#ffffff'; // Witte tekst
+                link.style.padding = '6px 10px';
+                link.style.borderRadius = '6px';
+            }
+        });
+
+        // Automatisch dropdown openen als het om subroutes gaat
+        const dropdown = document.getElementById('sidebarDropdown');
+        const dropdownRoutes = [
+            "{{ route('admin.files.blades') }}",
+            "{{ route('admin.files.controllers') }}",
+            "{{ route('admin.special.web') }}",
+            "{{ route('admin.files.menu') }}",
+            "{{ route('admin.files.css') }}"
+        ];
+
+        if (dropdownRoutes.includes(currentRoute)) {
+            dropdown.style.display = 'block';
+            localStorage.setItem('sidebarDropdownOpen', 'true');
+        }
+
+        // Herstel dropdown status uit localStorage
+        if (localStorage.getItem('sidebarDropdownOpen') === 'true') {
+            dropdown.style.display = 'block';
+        }
     });
 </script>
