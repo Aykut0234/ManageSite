@@ -8,17 +8,31 @@
         <div class="alert alert-success mt-2">{{ session('success') }}</div>
     @endif
 
-    <form method="POST" action="{{ route('admin.files.blade.update', ['name' => $name]) }}">
+    <form method="POST" action="{{ route('admin.files.blade.update') }}" style="margin-top: 30px;">
         @csrf
-        <div class="editor-container">
-            <textarea id="code" name="content">{{ old('content', $content) }}</textarea>
+    
+        <!-- Verborgen veld voor de oorspronkelijke naam -->
+        <input type="hidden" name="old_name" value="{{ $name }}">
+    
+        <div class="mb-4">
+            <label for="new_name" style="font-weight: 600; color: #1e293b;">Bestandsnaam</label>
+            <input type="text" name="new_name" id="new_name" class="form-control"
+                value="{{ old('new_name', $name) }}"
+                style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background-color: #fff;">
+            <small style="color: #64748b;">Bijvoorbeeld: <code>pages/about.blade.php</code></small>
         </div>
-        <br>
-        <button type="submit" class="btn btn-primary mt-3">Opslaan</button>
-        <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3">
-            ← Terug
-        </a>
+    
+        <div class="editor-container" style="margin-bottom: 20px;">
+            <label for="code" style="font-weight: 600; color: #1e293b;">Inhoud</label>
+            <textarea id="code" name="content" required>{{ old('content', $content) }}</textarea>
+        </div>
+    
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primary">💾 Opslaan</button>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">← Terug</a>
+        </div>
     </form>
+    
 </div>
 @endsection
 

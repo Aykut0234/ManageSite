@@ -39,15 +39,35 @@ class AdminFileController extends Controller
     }
     // Opslaan van wijzigingen in blade
     public function updateBlade(Request $request)
-    {
-        $name = urldecode($request->query('name'));
-        $path = resource_path('views/' . $name);
-    
-        abort_unless(File::exists($path), 404);
-    
-        File::put($path, $request->input('content'));
-        return redirect()->back()->with('success', 'Bestand opgeslagen.');
+{
+    $validated = $request->validate([
+        'old_name' => 'required|string',
+        'new_name' => 'required|string',
+        'content' => 'required|string',
+    ]);
+
+    $oldPath = resource_path('views/' . $validated['old_name']);
+    $newPath = resource_path('views/' . $validated['new_name']);
+
+    if (!File::exists($oldPath)) {
+        abort(404, 'Oud bestand niet gevonden.');
     }
+
+    // Als de naam veranderd is, hernoem het bestand
+    if ($validated['old_name'] !== $validated['new_name']) {
+        $newDir = dirname($newPath);
+        if (!File::exists($newDir)) {
+            File::makeDirectory($newDir, 0755, true);
+        }
+        rename($oldPath, $newPath);
+    }
+
+    // Schrijf de inhoud naar het nieuwe pad
+    File::put($newPath, $validated['content']);
+
+    return redirect()->route('admin.files.blades')->with('success', 'Bestand bijgewerkt.');
+}
+
     // Formulier voor nieuw blade-bestand
 public function createBlade()
 {
