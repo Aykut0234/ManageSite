@@ -194,9 +194,11 @@ public function editCss() {
 }
 
 public function updateCss(Request $request) {
-    File::put(resource_path('css/style.css'), $request->input('content'));
+    $path = public_path('css/style.css'); // ✅ juiste locatie in public/
+    File::put($path, $request->input('content'));
     return back()->with('success', 'style.css bijgewerkt!');
 }
+
 
 // ✅ Bewerken van menu (app.blade.php)
 public function editMenu() {
