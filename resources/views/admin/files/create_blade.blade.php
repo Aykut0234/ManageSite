@@ -34,12 +34,14 @@
             <textarea name="content" id="code" class="form-control" rows="15"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-success">➕ Aanmaken</button>
-    </form>
-    <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px;">
-        ← Terug
-    </a>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+    <button type="submit" class="btn btn-success">➕ Aanmaken</button>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary">← Terug</a>
+</div>
+
     
+    </form>
+  
 </div>
 @endsection
 

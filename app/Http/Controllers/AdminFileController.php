@@ -209,10 +209,40 @@ public function updateMenu(Request $request) {
     File::put(resource_path('views/layouts/app.blade.php'), $request->input('content'));
     return back()->with('success', 'Menu (app.blade.php) bijgewerkt!');
 }
+public function editJson($name)
+{
+    $path = resource_path("lang/{$name}");
+
+    if (!File::exists($path)) {
+        abort(404, 'Bestand niet gevonden.');
+    }
+
+    $content = File::get($path);
+
+    return view('admin.files.edit_single', [
+        'name' => "lang/{$name}",
+        'route' => route('admin.files.json.update', ['name' => $name]),
+        'content' => $content,
+    ]);
+}
+public function updateJson(Request $request, $name)
+{
+    $path = resource_path("lang/{$name}");
+
+    if (!File::exists($path)) {
+        abort(404, 'Bestand niet gevonden.');
+    }
+
+    File::put($path, $request->input('content'));
+
+    return back()->with('success', 'Taalbestand opgeslagen!');
+}
+
+
 public function essentials()
 {
-    // Belangrijke bestanden, inclusief controllers
     $belangrijkeBestanden = [
+        'components/header.blade.php',
         'dashboard-openbaar.blade.php',
         'dashboard.blade.php',
         'overons.blade.php',
@@ -221,40 +251,38 @@ public function essentials()
         'nieuws.blade.php',
         'agenda.blade.php',
         'contact.blade.php',
+        'auth/login.blade.php',
+        'auth/register.blade.php',
+        'components/footer.blade.php',
         'layouts/app.blade.php',
         'public/css/style.css',
         'routes/web.php',
-        'app/Http/Controllers/ChatController.php', // Toegevoegd: ChatController
-        'app/Http/Controllers/AdminFileController.php', // Toegevoegd: AdminFileController
-        'components/header.blade.php', // Toegevoegd: header
-        'components/footer.blade.php', // Toegevoegd: footer
-        'auth/login.blade.php', // Toegevoegd: login blade
-        'auth/register.blade.php', // Toegevoegd: register blade
+        'app/Http/Controllers/ChatController.php',
+        'app/Http/Controllers/AdminFileController.php',
+        'lang/am.json',
+        'lang/en.json',
+        'lang/fr.json',
+        'lang/ru.json',
     ];
 
-    // Verwerken van de bestanden en de bijbehorende routes
     $bladeFiles = collect($belangrijkeBestanden)
-        ->filter(fn($name) => File::exists(resource_path('views/' . $name)) || 
-                              $name === 'routes/web.php' || 
-                              $name === 'public/css/style.css' || 
-                              File::exists(base_path($name)))  // Toegevoegd: Controle op controllers
+        ->filter(function ($name) {
+            return File::exists(resource_path('views/' . $name))
+                || File::exists(base_path($name))
+                || File::exists(resource_path($name)); // ✅ check ook resources/lang/
+        })
         ->map(fn($name) => [
             'name' => $name,
             'edit_route' => match (true) {
                 $name === 'routes/web.php' => route('admin.special.web'),
                 $name === 'public/css/style.css' => route('admin.files.css'),
                 $name === 'layouts/app.blade.php' => route('admin.files.menu'),
-                $name === 'components/header.blade.php' => route('admin.files.blade.edit', ['name' => 'components/header.blade.php']),
-                $name === 'components/footer.blade.php' => route('admin.files.blade.edit', ['name' => 'components/footer.blade.php']),
-                $name === 'auth/login.blade.php' => route('admin.files.blade.edit', ['name' => 'auth/login.blade.php']),
-                $name === 'auth/register.blade.php' => route('admin.files.blade.edit', ['name' => 'auth/register.blade.php']),
-                $name === 'app/Http/Controllers/ChatController.php' => route('admin.files.controller.edit', ['name' => 'ChatController.php']),
-                $name === 'app/Http/Controllers/AdminFileController.php' => route('admin.files.controller.edit', ['name' => 'AdminFileController.php']),
+                str_starts_with($name, 'lang/') => route('admin.files.json.edit', ['name' => basename($name)]),
+                str_contains($name, 'Controllers') => route('admin.files.controller.edit', ['name' => basename($name)]),
                 default => route('admin.files.blade.edit', ['name' => $name])
             }
         ]);
 
-    // Retourneer de view met de belangrijke bestanden
     return view('admin.files.essentials', compact('bladeFiles'));
 }
 
