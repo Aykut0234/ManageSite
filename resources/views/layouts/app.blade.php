@@ -18,36 +18,32 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
-    {{-- Layout-wrapper voor sticky footer of flexbox --}}
-    @auth
-        @role('admin')
-            {{-- ✅ Sidebar layout voor admin --}}
-            <div class="admin-layout" style="display: flex; min-height: 100vh;">
-                @include('components.admin-sidebar')
-                <div class="admin-content" style="flex: 1; padding: 20px;">
-                    @yield('content')
+    <div class="layout-wrapper" style="min-height: 100vh; display: flex; flex-direction: column;">
+        @include('components.header')
+
+        @auth
+            @role('admin')
+                <div class="admin-layout" style="flex: 1; display: flex;">
+                    @include('components.admin-sidebar')
+                    
+
+                    <main class="admin-content" style="flex: 1; padding: 20px;">
+                        @yield('content')
+                    </main>
                 </div>
-            </div>
-        @else
-            {{-- ✅ Standaard layout voor gebruikers --}}
-            <div class="layout-wrapper">
-                @include('components.header')
-                <main class="content">
+            @else
+                <main class="content" style="flex: 1;">
                     @yield('content')
+                    
                 </main>
-                @include('components.footer')
-            </div>
-        @endrole
-    @else
-        {{-- ✅ Layout voor gasten --}}
-        <div class="layout-wrapper">
-            @include('components.header')
-            <main class="content">
+            @endrole
+        @else
+            <main class="content" style="flex: 1;">
                 @yield('content')
             </main>
-            @include('components.footer')
-        </div>
-    @endauth
+        @endauth
+
+    </div>
 
     <!-- CodeMirror (indien gebruikt op adminpagina's) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
@@ -76,15 +72,13 @@
                 });
             }
         });
-    </script>
-<script>
-    function toggleSidebarDropdown() {
-        const dropdown = document.getElementById('sidebarDropdown');
-        dropdown.style.display = (dropdown.style.display === 'none' || dropdown.style.display === '') ? 'flex' : 'none';
-    }
-</script>
 
-    {{-- Page-specific scripts --}}
+        function toggleSidebarDropdown() {
+            const dropdown = document.getElementById('sidebarDropdown');
+            dropdown.style.display = (dropdown.style.display === 'none' || dropdown.style.display === '') ? 'flex' : 'none';
+        }
+    </script>
+
     @yield('scripts')
 </body>
 </html>

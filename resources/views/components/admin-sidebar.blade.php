@@ -1,26 +1,8 @@
-<aside style="width: 260px; background: linear-gradient(to bottom, #1e293b, #0f172a); color: white; padding: 24px; display: flex; flex-direction: column; min-height: 100vh; position: relative;">
+<aside style="width: 260px; background: linear-gradient(to bottom, #1e293b, #0f172a); color: white; padding: 24px; display: flex; flex-direction: column;">
     <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">🌐 MijnWebsite</h2>
 
     {{-- 🌍 Taalkeuze vlaggen direct onder MijnWebsite --}}
-    @php
-        $locale = session('locale', app()->getLocale());
-        $flags = ['en' => 'gb', 'fr' => 'fr', 'ru' => 'ru', 'am' => 'am'];
-    @endphp
 
-    <div style="position: relative; margin-bottom: 30px;">
-        <button id="langSidebarBtn" style="background: none; border: none; padding: 0;">
-            <img src="https://flagcdn.com/w40/{{ $flags[$locale] ?? 'gb' }}.png" alt="{{ strtoupper($locale) }}" width="40">
-        </button>
-        <ul id="langSidebarDropdown" style="display: none; position: absolute; top: 100%; left: 0; background: #1e293b; border: 1px solid #334155; list-style: none; padding: 8px; margin: 0; z-index: 999; border-radius: 6px;">
-            @foreach ($flags as $lang => $flag)
-                <li style="margin: 6px 0;">
-                    <a href="{{ route('locale.set', $lang) }}">
-                        <img src="https://flagcdn.com/w40/{{ $flag }}.png" alt="{{ strtoupper($lang) }}" width="40" style="display: block;">
-                    </a>
-                </li>
-            @endforeach
-        </ul>
-    </div>
 
     <nav>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
