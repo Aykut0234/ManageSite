@@ -14,6 +14,7 @@
         @if (count($bladeFiles) > 0)
             <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 16px;">
                 @foreach ($bladeFiles as $file)
+                #vorigepagina = "blades"
                     <li style="background-color: #f9fafb; padding: 16px 20px; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.02); transition: box-shadow 0.2s; word-wrap: break-word;">
                         <a href="{{ route('admin.files.blade.edit', ['name' => $file['name']]) }}" style="word-wrap: break-word;">
                             {{ $file['name'] }}
@@ -34,7 +35,7 @@
     </div>
 
     <!-- Terugknop rechts uitlijnen -->
-    <a href="{{ url()->previous() }}" class="btn btn-secondary" style="margin-bottom: 20px; float: right;">
+    <a href="{{ request()->headers->get('referer') }}" class="btn btn-secondary mt-3">
         ← Terug
     </a>
 </div>
